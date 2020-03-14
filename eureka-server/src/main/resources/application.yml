@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: coss4-eureka-server
+
+server:
+  port: 8000
+
+eureka:
+  instance:
+    hostname: localhost # coss4-eureka-server
+    prefer-ip-address: false
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

@@ -1,0 +1,21 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: homepage-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:8000/eureka/
+
+zuul:
+  prefix: /imooc
+  routes:
+    course:
+      path: /homepage-course/**
+      serviceId: eureka-client-homepage-course
+      strip-prefix: false
+    user:
+      path: /homepage-user/**
+      serviceId: eureka-client-homepage-user
+      strip-prefix: false
