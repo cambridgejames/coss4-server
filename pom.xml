@@ -10,6 +10,8 @@
 
   <modules>
     <module>eureka-server</module>
+      <module>coss4-api-gateway</module>
+      <module>coss4-services</module>
   </modules>
 
   <packaging>pom</packaging>

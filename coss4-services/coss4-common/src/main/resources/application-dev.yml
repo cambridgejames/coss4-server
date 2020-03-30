@@ -1,0 +1,22 @@
+server:
+  port: 8801
+  servlet:
+    context-path: /coss4-common
+
+spring:
+  application:
+    name: eureka-client-coss4-common
+  datasource:
+    username: coss_user
+    password: MysqlCossuser123Cloud
+    url: jdbc:mysql://192.168.0.59:3306/coss_dev?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: cn.net.powerinv.coss4.entity

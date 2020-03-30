@@ -1,6 +1,6 @@
-# COSS4-Server
+# Verification Code
 
-> 竞赛在线评分系统 v4.0
+> 竞赛在线评分系统 v4.0 - 公共实体类
 
 ## 版权说明
 

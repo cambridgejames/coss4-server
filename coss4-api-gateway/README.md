@@ -1,6 +1,6 @@
-# COSS4-Server
+# API Gateway for COSS4 Project
 
-> 竞赛在线评分系统 v4.0
+> 基于 Zuul 的服务网关模块
 
 ## 版权说明
 

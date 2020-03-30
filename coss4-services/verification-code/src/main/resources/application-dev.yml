@@ -1,8 +1,12 @@
 server:
-  port: 9000
+  port: 8802
+  servlet:
+    context-path: /verification-code
+
 spring:
   application:
-    name: coss4-api-gateway
+    name: eureka-client-verification-code
+
 eureka:
   client:
     service-url:
