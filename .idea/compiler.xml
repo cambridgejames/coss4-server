@@ -7,15 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="verification-code" />
         <module name="eureka-server" />
         <module name="coss4-api-gateway" />
+        <module name="coss4-common" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="coss4-api-gateway" options="-parameters" />
+      <module name="coss4-common" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="verification-code" options="-parameters" />
     </option>
   </component>
 </project>
