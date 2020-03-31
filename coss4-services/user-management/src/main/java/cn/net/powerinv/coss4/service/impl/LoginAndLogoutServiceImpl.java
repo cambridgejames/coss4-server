@@ -44,7 +44,7 @@ public class LoginAndLogoutServiceImpl implements LoginAndLogoutService {
 
         UserVO newUser = usersMapper.selectSelective(users);
         if (newUser == null) {
-            return CommonResultUtil.returnFalse(MessageCode.LOGIN_FAILED);
+            return CommonResultUtil.returnFalse(MessageCode.USERNAME_OR_PASSWORD_NOT_TRUE);
         }
 
         // 将用户信息存入session

@@ -18,5 +18,7 @@ eureka:
       defaultZone: http://localhost:8000/eureka/
 
 mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: cn.net.powerinv.coss4.entity

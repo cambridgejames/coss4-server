@@ -9,14 +9,9 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVO {
+public class PasswordDTO {
     private Integer uid;
-    private String username;
-    private Integer sex;
-    private String nickname;
-    private String avatar;
-    private String phone;
-    private String eMail;
-    private Date createTime;
+    private String oldPassword;
+    private String newPassword;
     private Date updateTime;
 }

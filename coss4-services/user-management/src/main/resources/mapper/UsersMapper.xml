@@ -163,7 +163,7 @@
   </update>
 
   <resultMap id="UserVoMap" type="cn.net.powerinv.coss4.vo.UserVO">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="uid" />
     <result column="user_name" jdbcType="VARCHAR" property="username" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
@@ -202,4 +202,12 @@
       </trim>
     </where>
   </select>
+
+  <update id="updatePassword" parameterType="cn.net.powerinv.coss4.vo.PasswordDTO">
+    update users
+    set passwd = #{newPassword,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{uid,jdbcType=INTEGER}
+    and passwd = #{oldPassword,jdbcType=VARCHAR}
+  </update>
 </mapper>
