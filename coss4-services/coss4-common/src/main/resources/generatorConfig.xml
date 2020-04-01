@@ -34,10 +34,10 @@
 
         <!-- jdbc连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.0.59:3306/coss_dev?useUnicode=true&amp;
+                        connectionURL="jdbc:mysql://139.199.36.160:3306/coss_dev?useUnicode=true&amp;
                             characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=UTC"
                         userId="coss_user"
-                        password="MysqlCossuser123Cloud" />
+                        password="MysqlCossuser123Cloud!@#" />
         <!-- 类型转换 -->
         <javaTypeResolver>
             <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
@@ -47,12 +47,7 @@
         <!-- 生成实体类地址 -->
         <javaModelGenerator targetPackage="cn.net.powerinv.coss4.entity" targetProject="src/main/java"/>
 
-        <table tableName="%"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true">
+        <table tableName="%">
             <property name="useActualColumnNames" value="false" />
             <!-- 数据库表主键 -->
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />

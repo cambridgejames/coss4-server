@@ -38,18 +38,18 @@ mvn test
 3. 执行下述代码从源代码构建 jar 包
 ```lang=shell
 # Windows 环境下执行以下代码进行构建
-build
+coss4 --build
 
 # Linux 环境下执行以下代码进行构建
-sudo chmod u+x ./build.sh
-sudo ./build
+sudo chmod u+x ./coss4.sh
+sudo ./coss4 --build
 ```
 
 ## 文档目录
 
 ### 一、API接口文档
 
-竞赛在线评分系统API接口文档汇总：[COSS4-API.md](./COSS4-API.md)
+竞赛在线评分系统API接口文档：[COSS4-API.md](./COSS4-API.md)
 
 ### 二、项目描述文档
 

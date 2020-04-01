@@ -1,0 +1,3 @@
+Competition Online Scoring System 4.0.1
+Copyright (C) 2017-2020 Cambridge_James.
+License MIT <https://opensource.org/licenses/mit-license>

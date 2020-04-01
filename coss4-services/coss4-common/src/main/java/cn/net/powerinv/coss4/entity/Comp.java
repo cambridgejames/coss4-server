@@ -3,7 +3,7 @@ package cn.net.powerinv.coss4.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Comps implements Serializable {
+public class Comp implements Serializable {
     private Integer id;
 
     private String compName;

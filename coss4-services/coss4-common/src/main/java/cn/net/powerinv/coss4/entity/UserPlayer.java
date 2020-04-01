@@ -3,7 +3,7 @@ package cn.net.powerinv.coss4.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CompUsersTemporary implements Serializable {
+public class UserPlayer implements Serializable {
     private Integer id;
 
     private String userName;

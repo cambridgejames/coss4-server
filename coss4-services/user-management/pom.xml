@@ -40,6 +40,22 @@
             </exclusions>
         </dependency>
 
+        <!-- Eureka 客户端 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!-- 引入 Feign, 以声明的方式调用微服务 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- 引入服务容错 Hystrix 的依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>cn.net.powerinv.coss4</groupId>
             <artifactId>coss4-common</artifactId>

@@ -173,7 +173,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <select id="selectSelective" parameterType="cn.net.powerinv.coss4.entity.Users" resultMap="UserVoMap">
+  <select id="selectSelective" parameterType="cn.net.powerinv.coss4.entity.User" resultMap="UserVoMap">
     select id, user_name, sex, nickname, avatar_image, phone_number, e_mail, create_time, update_time
     from users
     <where>

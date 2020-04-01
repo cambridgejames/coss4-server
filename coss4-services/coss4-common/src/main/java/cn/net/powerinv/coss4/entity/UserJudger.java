@@ -3,7 +3,7 @@ package cn.net.powerinv.coss4.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CompJudgeTemporary implements Serializable {
+public class UserJudger implements Serializable {
     private Integer id;
 
     private String judgeName;

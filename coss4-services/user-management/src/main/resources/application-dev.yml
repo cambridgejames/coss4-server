@@ -12,13 +12,17 @@ spring:
     url: jdbc:mysql://139.199.36.160:3306/coss_dev?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
     driver-class-name: com.mysql.jdbc.Driver
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/
-
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: cn.net.powerinv.coss4.entity
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+
+feign:
+  hystrix:
+    enabled: true
