@@ -15,6 +15,7 @@
     <modules>
         <module>coss4-common</module>
         <module>verification-code</module>
+        <module>user-management</module>
     </modules>
 
     <packaging>pom</packaging>

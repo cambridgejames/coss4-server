@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.net.powerinv.coss4.entity.mapper.UsersMapper">
+  <resultMap id="BaseResultMap" type="cn.net.powerinv.coss4.entity.Users">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="avatar_image" jdbcType="VARCHAR" property="avatarImage" />
+    <result column="role_group" jdbcType="INTEGER" property="roleGroup" />
+    <result column="phone_number" jdbcType="CHAR" property="phoneNumber" />
+    <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, passwd, sex, nickname, avatar_image, role_group, phone_number, e_mail, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.net.powerinv.coss4.entity.Users">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into users (user_name, passwd, sex, 
+      nickname, avatar_image, role_group, 
+      phone_number, e_mail, create_time, 
+      update_time)
+    values (#{userName,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{nickname,jdbcType=VARCHAR}, #{avatarImage,jdbcType=VARCHAR}, #{roleGroup,jdbcType=INTEGER}, 
+      #{phoneNumber,jdbcType=CHAR}, #{eMail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.net.powerinv.coss4.entity.Users">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="passwd != null">
+        passwd,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="avatarImage != null">
+        avatar_image,
+      </if>
+      <if test="roleGroup != null">
+        role_group,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="eMail != null">
+        e_mail,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarImage != null">
+        #{avatarImage,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroup != null">
+        #{roleGroup,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null">
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.net.powerinv.coss4.entity.Users">
+    update users
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarImage != null">
+        avatar_image = #{avatarImage,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroup != null">
+        role_group = #{roleGroup,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null">
+        e_mail = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.net.powerinv.coss4.entity.Users">
+    update users
+    set user_name = #{userName,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      avatar_image = #{avatarImage,jdbcType=VARCHAR},
+      role_group = #{roleGroup,jdbcType=INTEGER},
+      phone_number = #{phoneNumber,jdbcType=CHAR},
+      e_mail = #{eMail,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="UserVoMap" type="cn.net.powerinv.coss4.vo.UserVO">
+    <id column="id" jdbcType="INTEGER" property="uid" />
+    <result column="user_name" jdbcType="VARCHAR" property="username" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="avatar_image" jdbcType="VARCHAR" property="avatar" />
+    <result column="phone_number" jdbcType="CHAR" property="phone" />
+    <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <select id="selectSelective" parameterType="cn.net.powerinv.coss4.entity.Users" resultMap="UserVoMap">
+    select id, user_name, sex, nickname, avatar_image, phone_number, e_mail, create_time, update_time
+    from users
+    <where>
+      <trim prefix="" suffix="" prefixOverrides="and">
+        <if test="userName != null">
+          and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="passwd != null">
+          and passwd = #{passwd,jdbcType=VARCHAR}
+        </if>
+        <if test="sex != null">
+          and sex = #{sex,jdbcType=INTEGER}
+        </if>
+        <if test="nickname != null">
+          and nickname = #{nickname,jdbcType=VARCHAR}
+        </if>
+        <if test="avatarImage != null">
+          and avatar_image = #{avatarImage,jdbcType=VARCHAR}
+        </if>
+        <if test="phoneNumber != null">
+          and phone_number = #{phoneNumber,jdbcType=CHAR}
+        </if>
+        <if test="eMail != null">
+          and e_mail = #{eMail,jdbcType=VARCHAR}
+        </if>
+      </trim>
+    </where>
+  </select>
+
+  <update id="updatePassword" parameterType="cn.net.powerinv.coss4.vo.PasswordDTO">
+    update users
+    set passwd = #{newPassword,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{uid,jdbcType=INTEGER}
+    and passwd = #{oldPassword,jdbcType=VARCHAR}
+  </update>
+</mapper>
