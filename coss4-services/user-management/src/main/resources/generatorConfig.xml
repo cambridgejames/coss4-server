@@ -53,7 +53,7 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="user%"
+        <table tableName="%"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

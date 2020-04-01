@@ -2,7 +2,7 @@ package cn.net.powerinv.coss4.controller;
 
 import cn.net.powerinv.coss4.basic.util.CommonResultUtil;
 import cn.net.powerinv.coss4.basic.util.MessageCode;
-import cn.net.powerinv.coss4.entity.Users;
+import cn.net.powerinv.coss4.entity.User;
 import cn.net.powerinv.coss4.service.BaseInformationService;
 import cn.net.powerinv.coss4.vo.PasswordDTO;
 import cn.net.powerinv.coss4.vo.UserDTO;
@@ -47,7 +47,7 @@ public class BaseInformationController {
         if (StringUtils.isEmpty(userDTO.getNickname())) {
             userDTO.setNickname(userDTO.getUsername()); // 默认昵称与用户名相同
         }
-        Users user = new Users();
+        User user = new User();
         user.setUserName(userDTO.getUsername());
         user.setPasswd(userDTO.getPassword());
         user.setSex(userDTO.getSex() ? 1 : 0);
@@ -85,7 +85,7 @@ public class BaseInformationController {
         if (ObjectUtils.isEmpty(userDTO.getUid())) {
             return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
         }
-        Users user = new Users();
+        User user = new User();
         user.setId(userDTO.getUid());
         user.setUserName(userDTO.getUsername());
         if (!ObjectUtils.isEmpty(userDTO.getSex())) {

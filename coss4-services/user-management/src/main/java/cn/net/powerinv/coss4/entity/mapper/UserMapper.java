@@ -1,30 +1,30 @@
 package cn.net.powerinv.coss4.entity.mapper;
 
-import cn.net.powerinv.coss4.entity.Users;
+import cn.net.powerinv.coss4.entity.User;
 import cn.net.powerinv.coss4.vo.PasswordDTO;
 import cn.net.powerinv.coss4.vo.UserVO;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface UsersMapper {
+public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Users record);
+    int insert(User record);
 
-    int insertSelective(Users record);
+    int insertSelective(User record);
 
-    Users selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Users record);
+    int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(Users record);
+    int updateByPrimaryKey(User record);
 
     /**
      * 查询
      * @param record 记录（查询条件）
      * @return 查询结果
      */
-    UserVO selectSelective(Users record);
+    UserVO selectSelective(User record);
 
     /**
      * 修改密码

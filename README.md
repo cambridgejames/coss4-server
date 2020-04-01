@@ -35,7 +35,7 @@ cd coss4-server
 mvn test
 ```
    
-2. 执行下述代码从源代码构建 jar 包
+3. 执行下述代码从源代码构建 jar 包
 ```lang=shell
 # Windows 环境下执行以下代码进行构建
 build
