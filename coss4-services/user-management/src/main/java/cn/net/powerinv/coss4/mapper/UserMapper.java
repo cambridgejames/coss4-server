@@ -1,4 +1,4 @@
-package cn.net.powerinv.coss4.entity.mapper;
+package cn.net.powerinv.coss4.mapper;
 
 import cn.net.powerinv.coss4.entity.User;
 import cn.net.powerinv.coss4.vo.PasswordDTO;
@@ -24,7 +24,7 @@ public interface UserMapper {
      * @param record 记录（查询条件）
      * @return 查询结果
      */
-    UserVO selectSelective(User record);
+    User selectSelective(User record);
 
     /**
      * 修改密码

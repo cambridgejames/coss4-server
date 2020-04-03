@@ -3,7 +3,7 @@ package cn.net.powerinv.coss4.service.impl;
 import cn.net.powerinv.coss4.basic.util.CommonResultUtil;
 import cn.net.powerinv.coss4.basic.util.MessageCode;
 import cn.net.powerinv.coss4.entity.User;
-import cn.net.powerinv.coss4.entity.mapper.UserMapper;
+import cn.net.powerinv.coss4.mapper.UserMapper;
 import cn.net.powerinv.coss4.service.BaseInformationService;
 import cn.net.powerinv.coss4.vo.PasswordDTO;
 import cn.net.powerinv.coss4.vo.UserVO;

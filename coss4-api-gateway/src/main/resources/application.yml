@@ -1,9 +1,28 @@
 server:
   port: 9000
+
 spring:
   application:
     name: coss4-api-gateway
+
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8000/eureka/
+      defaultZone: http://192.168.0.59:8000/eureka/
+
+zuul:
+  prefix: /coss4
+  routes:
+    user-management:
+      path: /user-management/**
+      serviceId: eureka-client-user-management
+      strip-prefix: false
+    competition-management:
+      path: /competition-management/**
+      serviceId: eureka-client-competition-management
+      strip-prefix: false
+    verification-code:
+      path: /verification-code/**
+      serviceId: eureka-client-verification-code
+      strip-prefix: false
+  sensitive-headers:

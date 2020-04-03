@@ -1,4 +1,4 @@
-package cn.net.powerinv.coss4;
+package cn.net.powerinv.coss4.competition;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -13,9 +13,9 @@ import org.springframework.session.data.mongo.config.annotation.web.http.EnableM
 @EnableEurekaClient
 @EnableMongoHttpSession
 @SpringBootApplication
-@MapperScan("cn.net.powerinv.coss4.mapper")
-public class UserManagementApplication {
+@MapperScan("cn.net.powerinv.coss4.competition.mapper")
+public class CompetitionManagementApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserManagementApplication.class, args);
+        SpringApplication.run(CompetitionManagementApplication.class, args);
     }
 }

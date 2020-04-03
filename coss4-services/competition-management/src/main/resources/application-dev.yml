@@ -1,15 +1,15 @@
 server:
-  port: 8803
+  port: 8804
   servlet:
-    context-path: /user-management
+    context-path: /competition-management
     session:
-      timeout: 30
+      timeout: 120
       cookie:
         path: /
 
 spring:
   application:
-    name: eureka-client-user-management
+    name: eureka-client-competition-management
   datasource:
     username: coss_user
     password: MysqlCossuser123Cloud!@#

@@ -1,4 +1,4 @@
-package cn.net.powerinv.coss4.entity.mapper;
+package cn.net.powerinv.coss4.mapper;
 
 import cn.net.powerinv.coss4.entity.UserPlayer;
 

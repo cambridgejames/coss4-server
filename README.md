@@ -1,4 +1,4 @@
-# COSS4-Server
+# COSS4 Server
 
 ![](https://img.shields.io/github/languages/code-size/cambridgejames/coss4-server)
 ![](https://img.shields.io/github/issues/cambridgejames/coss4-server)
@@ -15,28 +15,43 @@
 
 ## 构建
 
-### 一、开发环境
+### 一、环境
+
+#### 1. 开发环境
 
 在执行构建前，请确保下述开发环境已成功搭建，并正确配置好环境变量：
 
 - Java: JDK 8u241
 - Maven 3.6.1
 
+#### 2. 运行环境
+
+本项目的正常运行至少需要以下环境的支持：
+
+- Java: JRE 8u241
+- MySQL: 8.0.15 或 MariaDB: 5.5.64
+- MongoDB 4.2.5
+
 ### 二、构建方法
 
-1. 执行下述代码将存储库克隆到本地环境
-```lang=shell
+#### 1. 将存储库克隆到本地环境
+```
 git clone git@github.com:cambridgejames/coss4-server.git
 cd coss4-server
 ```
 
-2. 执行下述代码以运行单元测试
+#### 2. 安装第三方依赖库
+```
+mvn -f pom.xml dependency:copy-dependencies
+```
+
+#### 3. 运行单元测试
 ```
 mvn test
 ```
    
-3. 执行下述代码从源代码构建 jar 包
-```lang=shell
+#### 4. 从源代码构建 jar 包
+```
 # Windows 环境下执行以下代码进行构建
 coss4 --build
 
@@ -45,7 +60,7 @@ sudo chmod u+x ./coss4.sh
 sudo ./coss4 --build
 ```
 
-## 文档目录
+## 文档
 
 ### 一、API接口文档
 
@@ -64,3 +79,7 @@ Zuul 服务网关模块：[API Gateway](./coss4-api-gateway/README.md)
 ## 版权说明
 
 该项目签署了MIT授权许可，详情请参阅 [LICENSE](./LICENSE) 文件
+
+原作者：Cambridge James
+
+如果正在使用过程中遇到问题，请提交 Issues 至 [GitHub](https://github.com/cambridgejames/coss4-server/issues)

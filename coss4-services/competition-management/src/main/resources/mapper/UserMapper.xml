@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.net.powerinv.coss4.mapper.UserMapper">
+<mapper namespace="cn.net.powerinv.coss4.competition.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="cn.net.powerinv.coss4.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
@@ -160,54 +160,5 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
-  </update>
-
-  <resultMap id="UserVoMap" type="cn.net.powerinv.coss4.vo.UserVO">
-    <id column="id" jdbcType="INTEGER" property="uid" />
-    <result column="user_name" jdbcType="VARCHAR" property="username" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="avatar_image" jdbcType="VARCHAR" property="avatar" />
-    <result column="phone_number" jdbcType="CHAR" property="phone" />
-    <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <select id="selectSelective" parameterType="cn.net.powerinv.coss4.entity.User" resultMap="BaseResultMap">
-    select id, user_name, sex, nickname, avatar_image, phone_number, e_mail, create_time, update_time
-    from user
-    <where>
-      <trim prefix="" suffix="" prefixOverrides="and">
-        <if test="userName != null">
-          and user_name = #{userName,jdbcType=VARCHAR}
-        </if>
-        <if test="passwd != null">
-          and passwd = #{passwd,jdbcType=VARCHAR}
-        </if>
-        <if test="sex != null">
-          and sex = #{sex,jdbcType=INTEGER}
-        </if>
-        <if test="nickname != null">
-          and nickname = #{nickname,jdbcType=VARCHAR}
-        </if>
-        <if test="avatarImage != null">
-          and avatar_image = #{avatarImage,jdbcType=VARCHAR}
-        </if>
-        <if test="phoneNumber != null">
-          and phone_number = #{phoneNumber,jdbcType=CHAR}
-        </if>
-        <if test="eMail != null">
-          and e_mail = #{eMail,jdbcType=VARCHAR}
-        </if>
-      </trim>
-    </where>
-  </select>
-
-  <update id="updatePassword" parameterType="cn.net.powerinv.coss4.vo.PasswordDTO">
-    update user
-    set passwd = #{newPassword,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{uid,jdbcType=INTEGER}
-    and passwd = #{oldPassword,jdbcType=VARCHAR}
   </update>
 </mapper>
