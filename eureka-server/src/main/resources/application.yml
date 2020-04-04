@@ -7,7 +7,7 @@ server:
 
 eureka:
   instance:
-    hostname: localhost # coss4-eureka-server
+    hostname: 0.0.0.0 # coss4-eureka-server
     prefer-ip-address: false
   client:
     fetch-registry: false

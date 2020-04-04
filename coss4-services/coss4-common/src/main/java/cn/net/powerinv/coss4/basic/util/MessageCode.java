@@ -27,10 +27,12 @@ public enum MessageCode {
     PASSWORD_CANT_SAME(1700, "新旧密码不能相同"),
     PARAMETERS_NOT_ENOUGH(2000, "传入的参数不足"),
     PARAMETERS_TYPE_ILLEGAL(2100, "传入的参数类型不合法"),
+    PARAMETERS_ILLEGAL(2200, "传入的参数不合法"),
     NO_SUCH_FILE(3000, "找不到对应的文件"),
     FILE_ALREADY_EXIST(3100, "文件已存在"),
     FILE_READ_ERROR(3200, "文件读取时出错"),
     FILE_WRITE_ERROR(3300, "文件写入时出错"),
+    INSERT_FAILED(4000, "数据插入失败"),
     SERVER_INTERNAL_ERROR(5500, "服务器内部错误"),
     OTHER_ERROR(5900, "请求失败");
 

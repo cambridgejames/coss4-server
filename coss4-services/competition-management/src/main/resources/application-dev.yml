@@ -7,6 +7,11 @@ server:
       cookie:
         path: /
 
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
 spring:
   application:
     name: eureka-client-competition-management
@@ -24,7 +29,6 @@ spring:
     store-type: mongodb
     jdbc:
       table-name: sessions
-
 
 mybatis:
   configuration:

@@ -8,6 +8,11 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.session.data.mongo.config.annotation.web.http.EnableMongoHttpSession;
 
+/**
+ * 竞赛信息管理服务
+ * @author PengJQ
+ * @date 2020-04-03
+ */
 @EnableFeignClients
 @EnableCircuitBreaker
 @EnableEurekaClient

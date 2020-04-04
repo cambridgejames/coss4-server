@@ -47,7 +47,7 @@
         <!-- 生成实体类地址 -->
         <javaModelGenerator targetPackage="cn.net.powerinv.coss4.entity" targetProject="src/main/java"/>
 
-        <table tableName="%">
+        <table tableName="comp">
             <property name="useActualColumnNames" value="false" />
             <!-- 数据库表主键 -->
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />

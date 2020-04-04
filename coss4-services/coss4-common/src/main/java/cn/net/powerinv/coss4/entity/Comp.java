@@ -10,9 +10,15 @@ public class Comp implements Serializable {
 
     private Date startTime;
 
+    private Integer userId;
+
+    private String imageUrl;
+
     private Boolean endingSign;
 
     private Boolean enterSign;
+
+    private Integer compState;
 
     private Date createTime;
 
@@ -46,6 +52,22 @@ public class Comp implements Serializable {
         this.startTime = startTime;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Boolean getEndingSign() {
         return endingSign;
     }
@@ -60,6 +82,14 @@ public class Comp implements Serializable {
 
     public void setEnterSign(Boolean enterSign) {
         this.enterSign = enterSign;
+    }
+
+    public Integer getCompState() {
+        return compState;
+    }
+
+    public void setCompState(Integer compState) {
+        this.compState = compState;
     }
 
     public Date getCreateTime() {
@@ -95,8 +125,11 @@ public class Comp implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", compName=").append(compName);
         sb.append(", startTime=").append(startTime);
+        sb.append(", userId=").append(userId);
+        sb.append(", imageUrl=").append(imageUrl);
         sb.append(", endingSign=").append(endingSign);
         sb.append(", enterSign=").append(enterSign);
+        sb.append(", compState=").append(compState);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", detailedInformation=").append(detailedInformation);
