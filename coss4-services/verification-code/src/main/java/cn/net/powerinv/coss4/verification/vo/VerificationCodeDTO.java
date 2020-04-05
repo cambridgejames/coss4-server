@@ -1,4 +1,4 @@
-package cn.net.powerinv.coss4.vo;
+package cn.net.powerinv.coss4.verification.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

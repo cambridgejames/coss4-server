@@ -1,10 +1,10 @@
-package cn.net.powerinv.coss4.service.impl;
+package cn.net.powerinv.coss4.verification.service.impl;
 
-import cn.net.powerinv.coss4.basic.bean.ImageVerificationCode;
-import cn.net.powerinv.coss4.basic.util.ImageVerificationUtil;
+import cn.net.powerinv.coss4.verification.basic.bean.ImageVerificationCode;
+import cn.net.powerinv.coss4.verification.basic.util.ImageVerificationUtil;
 import cn.net.powerinv.coss4.basic.util.CommonResultUtil;
 import cn.net.powerinv.coss4.basic.util.MessageCode;
-import cn.net.powerinv.coss4.service.ImageVerificationService;
+import cn.net.powerinv.coss4.verification.service.ImageVerificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -38,8 +38,12 @@ public class ImageVerificationServiceImpl implements ImageVerificationService {
     public Map<String, Object> checkCaseSensitive(String code) {
         HttpServletRequest request = ((ServletRequestAttributes) Objects
                 .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        // 如果获取不到验证码或者验证码校验失败，返回请求失败
         String trueCode = (String) request.getSession().getAttribute("verificationCode");
-        return CommonResultUtil.returnTrue(code.equals(trueCode));
+        if (StringUtils.isEmpty(trueCode) || !code.equals(trueCode)) {
+            return CommonResultUtil.returnFalse(MessageCode.VERIFICATION_NOT_TRUE);
+        }
+        return CommonResultUtil.returnTrue();
     }
 
     @Override
@@ -47,9 +51,10 @@ public class ImageVerificationServiceImpl implements ImageVerificationService {
         HttpServletRequest request = ((ServletRequestAttributes) Objects
                 .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         String trueCode = (String) request.getSession().getAttribute("verificationCode");
-        if (StringUtils.isEmpty(trueCode)) {
-            return CommonResultUtil.returnTrue(false);
+        // 如果获取不到验证码或者验证码校验失败，返回请求失败
+        if (StringUtils.isEmpty(trueCode) || !code.toLowerCase().equals(trueCode.toLowerCase())) {
+            return CommonResultUtil.returnFalse(MessageCode.VERIFICATION_NOT_TRUE);
         }
-        return CommonResultUtil.returnTrue(code.toLowerCase().equals(trueCode.toLowerCase()));
+        return CommonResultUtil.returnTrue();
     }
 }

@@ -1,14 +1,15 @@
-package cn.net.powerinv.coss4.basic.util;
+package cn.net.powerinv.coss4.verification.basic.util;
 
-import cn.net.powerinv.coss4.basic.bean.ImageVerificationCode;
+import cn.net.powerinv.coss4.verification.basic.bean.ImageVerificationCode;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 @Component
@@ -87,9 +88,7 @@ public class ImageVerificationUtil {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(buffImg, "png", byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
-        BASE64Encoder encoder = new BASE64Encoder();
-        String imageBase = "data:image/jpg;base64," + encoder.encodeBuffer(bytes).trim()
-                .replaceAll("\n", "").replaceAll("\r", "");
+        String imageBase = "data:image/jpg;base64," + new String(Base64.encodeBase64(bytes));
 
         return new ImageVerificationCode(imageBase, randomCode.toString());
     }

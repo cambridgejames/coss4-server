@@ -10,8 +10,25 @@ eureka:
     service-url:
       defaultZone: http://192.168.0.59:8000/eureka/
 
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 1000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
 zuul:
   prefix: /coss4
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 10000
   routes:
     user-management:
       path: /user-management/**

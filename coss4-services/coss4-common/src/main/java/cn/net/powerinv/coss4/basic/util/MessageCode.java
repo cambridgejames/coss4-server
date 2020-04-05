@@ -25,6 +25,7 @@ public enum MessageCode {
     USERNAME_ALREADY_EXIST(1600, "用户名已存在"),
     USER_NOT_FOUND(1600, "用户不存在"),
     PASSWORD_CANT_SAME(1700, "新旧密码不能相同"),
+    VERIFICATION_NOT_TRUE(1800, "验证码错误"),
     PARAMETERS_NOT_ENOUGH(2000, "传入的参数不足"),
     PARAMETERS_TYPE_ILLEGAL(2100, "传入的参数类型不合法"),
     PARAMETERS_ILLEGAL(2200, "传入的参数不合法"),

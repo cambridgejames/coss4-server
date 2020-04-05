@@ -1,9 +1,9 @@
-package cn.net.powerinv.coss4.controller;
+package cn.net.powerinv.coss4.verification.controller;
 
 import cn.net.powerinv.coss4.basic.util.CommonResultUtil;
 import cn.net.powerinv.coss4.basic.util.MessageCode;
-import cn.net.powerinv.coss4.service.ImageVerificationService;
-import cn.net.powerinv.coss4.vo.VerificationCodeDTO;
+import cn.net.powerinv.coss4.verification.service.ImageVerificationService;
+import cn.net.powerinv.coss4.verification.vo.VerificationCodeDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
