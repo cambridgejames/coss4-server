@@ -1,5 +1,6 @@
 package cn.net.powerinv.coss4.competition.vo;
 
+import cn.net.powerinv.coss4.vo.PageHelperDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

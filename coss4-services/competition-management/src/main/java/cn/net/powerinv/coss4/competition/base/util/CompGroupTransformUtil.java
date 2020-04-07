@@ -1,9 +1,12 @@
 package cn.net.powerinv.coss4.competition.base.util;
 
+import cn.net.powerinv.coss4.competition.entity.CompGroupExt;
 import cn.net.powerinv.coss4.competition.vo.CompGroupDTO;
 import cn.net.powerinv.coss4.competition.vo.CompGroupVO;
 import cn.net.powerinv.coss4.entity.CompGroup;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,7 @@ public class CompGroupTransformUtil {
             return null;
         }
         // 只要是正常的存入数据库，取出来就不会有任何问题，不需要throw
-        JSONObject detailRule = JSONObject.parseObject(compGroup.getDetailRule());
+        JSONArray detailRule = JSONArray.parseArray(compGroup.getDetailRule());
         return new CompGroupVO(compGroup.getId(), compGroup.getGroupName(), compGroup.getCompId(),
                 compGroup.getPriority(), detailRule, compGroup.getCreateTime(), compGroup.getUpdateTime());
     }
@@ -65,14 +68,16 @@ public class CompGroupTransformUtil {
         if (compGroupDTO == null) {
             return null;
         }
-        CompGroup compGroup = new CompGroup();
+        CompGroup compGroup = new CompGroupExt();
         if (ifGid) {
             compGroup.setId(compGroupDTO.getId());
         }
         compGroup.setGroupName(compGroupDTO.getGroupName());
         compGroup.setPriority(compGroupDTO.getPriority());
         compGroup.setCompId(compGroupDTO.getCompId());
-        compGroup.setDetailRule(((JSONObject) JSONObject.toJSON(compGroupDTO.getDetailRule())).toString());
+        if (compGroupDTO.getDetailRule() != null) {
+            compGroup.setDetailRule(((JSONArray) JSONArray.toJSON(compGroupDTO.getDetailRule())).toString());
+        }
         return compGroup;
     }
 }
