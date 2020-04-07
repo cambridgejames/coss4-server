@@ -3,22 +3,22 @@ package cn.net.powerinv.coss4.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserPlayer implements Serializable {
+public class CompGroup implements Serializable {
     private Integer id;
 
-    private String userName;
-
-    private String password;
-
-    private String imageUrl;
+    private String groupName;
 
     private Integer compId;
 
-    private Integer userId;
+    private Integer priority;
+
+    private String state;
 
     private Date createTime;
 
     private Date updateTime;
+
+    private String detailRule;
 
     private static final long serialVersionUID = 1L;
 
@@ -30,28 +30,12 @@ public class UserPlayer implements Serializable {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public Integer getCompId() {
@@ -62,12 +46,20 @@ public class UserPlayer implements Serializable {
         this.compId = compId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getPriority() {
+        return priority;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public Date getCreateTime() {
@@ -86,6 +78,14 @@ public class UserPlayer implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public String getDetailRule() {
+        return detailRule;
+    }
+
+    public void setDetailRule(String detailRule) {
+        this.detailRule = detailRule;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -93,13 +93,13 @@ public class UserPlayer implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", userName=").append(userName);
-        sb.append(", password=").append(password);
-        sb.append(", imageUrl=").append(imageUrl);
+        sb.append(", groupName=").append(groupName);
         sb.append(", compId=").append(compId);
-        sb.append(", userId=").append(userId);
+        sb.append(", priority=").append(priority);
+        sb.append(", state=").append(state);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
+        sb.append(", detailRule=").append(detailRule);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

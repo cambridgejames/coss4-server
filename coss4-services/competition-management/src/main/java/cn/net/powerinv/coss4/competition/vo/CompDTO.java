@@ -20,5 +20,5 @@ public class CompDTO extends PageHelperDTO {
     private Boolean endingSign;
     private Boolean enterSign;
     private Integer compState;
-    private JSONObject detailedInformation;
+    private String detailedInformation;
 }

@@ -3,8 +3,6 @@ package cn.net.powerinv.coss4.competition.base.util;
 import cn.net.powerinv.coss4.competition.vo.CompDTO;
 import cn.net.powerinv.coss4.competition.vo.CompVO;
 import cn.net.powerinv.coss4.entity.Comp;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +21,14 @@ public class CompTransformUtil {
      * @param comp 数据库查询结果
      * @return 转换成的VO对象
      */
-    public static CompVO entity2Vo(Comp comp) throws Exception {
+    public static CompVO entity2Vo(Comp comp) {
         if (comp == null) {
             return null;
         }
-        JSONObject detail = JSON.parseObject(comp.getDetailedInformation());
+        // JSONObject detail = JSON.parseObject(comp.getDetailedInformation());
         return new CompVO(comp.getId(), comp.getCompName(), comp.getStartTime(), comp.getUserId(),
                 comp.getImageUrl(), comp.getEndingSign(), comp.getEnterSign(), comp.getCompState(),
-                detail, comp.getCreateTime(), comp.getUpdateTime());
+                comp.getDetailedInformation(), comp.getCreateTime(), comp.getUpdateTime());
     }
 
     /**
@@ -38,7 +36,7 @@ public class CompTransformUtil {
      * @param compList 数据库查询结果
      * @return 转换成的VO对象列表
      */
-    public static List<CompVO> entity2VoList(List<Comp> compList) throws Exception {
+    public static List<CompVO> entity2VoList(List<Comp> compList) {
         List<CompVO> compVOList = new ArrayList<>();
         if (compList != null && compList.size() != 0) {
             for (Comp comp : compList) {
@@ -75,7 +73,7 @@ public class CompTransformUtil {
         comp.setImageUrl(compDTO.getImageUrl());
         comp.setEndingSign(compDTO.getEndingSign());
         comp.setCompState(compDTO.getCompState());
-        comp.setDetailedInformation(JSON.toJSONString(compDTO.getDetailedInformation()));
+        comp.setDetailedInformation(compDTO.getDetailedInformation());
         return comp;
     }
 }

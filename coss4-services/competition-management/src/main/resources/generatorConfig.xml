@@ -53,7 +53,7 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="comp"
+        <table tableName="comp_group"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

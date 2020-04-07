@@ -7,8 +7,7 @@ server:
 
 eureka:
   instance:
-    hostname: 0.0.0.0 # coss4-eureka-server
-    prefer-ip-address: false
+    prefer-ip-address: true
   client:
     fetch-registry: false
     register-with-eureka: false

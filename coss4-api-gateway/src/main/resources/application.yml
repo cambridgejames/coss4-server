@@ -30,13 +30,17 @@ zuul:
     connect-timeout-millis: 10000
     socket-timeout-millis: 10000
   routes:
-    user-management:
-      path: /user-management/**
-      serviceId: eureka-client-user-management
-      strip-prefix: false
     competition-management:
       path: /competition-management/**
       serviceId: eureka-client-competition-management
+      strip-prefix: false
+    system-dictionary:
+      path: /system-dictionary/**
+      serviceId: eureka-client-system-dictionary
+      strip-prefix: false
+    user-management:
+      path: /user-management/**
+      serviceId: eureka-client-user-management
       strip-prefix: false
     verification-code:
       path: /verification-code/**

@@ -8,7 +8,7 @@
 
     <!-- 一个数据库一个context -->
     <!--defaultModelType="flat" 大数据字段，不分表 -->
-    <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <context id="MysqlTables" defaultModelType="flat">
         <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
         一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
         <property name="autoDelimitKeywords" value="true" />
@@ -46,8 +46,17 @@
 
         <!-- 生成实体类地址 -->
         <javaModelGenerator targetPackage="cn.net.powerinv.coss4.entity" targetProject="src/main/java"/>
+        <!-- 生成mapper xml文件 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <!-- 生成mapper xml对应dao接口 -->
+        <javaClientGenerator targetPackage="cn.net.powerinv.coss4.entity.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
 
-        <table tableName="%">
+
+        <table tableName="%"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false" />
             <!-- 数据库表主键 -->
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />

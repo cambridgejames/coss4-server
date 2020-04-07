@@ -54,12 +54,11 @@ public class BaseInformationServiceImpl implements BaseInformationService {
         if (user == null) {
             return CommonResultUtil.returnFalse(MessageCode.TOKEN_NOT_FOUND);
         }
-
         comp.setUserId(user.getId());
         if (compMapper.insertSelective(comp) != 1) {
             return CommonResultUtil.returnFalse(MessageCode.INSERT_FAILED);
         }
-        return CommonResultUtil.returnTrue();
+        return CommonResultUtil.returnTrue(CompTransformUtil.entity2Vo(comp));
     }
 
     /**
@@ -74,13 +73,8 @@ public class BaseInformationServiceImpl implements BaseInformationService {
         if (comp == null) {
             return CommonResultUtil.returnFalse(MessageCode.OTHER_ERROR);
         }
-        try {
-            CompVO compVO = CompTransformUtil.entity2Vo(comp);
-            return CommonResultUtil.returnTrue(compVO);
-        } catch (Exception e) {
-            log.warn(e.getMessage(), e);
-            return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_TYPE_ILLEGAL);
-        }
+        CompVO compVO = CompTransformUtil.entity2Vo(comp);
+        return CommonResultUtil.returnTrue(compVO);
     }
 
     /**
@@ -95,13 +89,8 @@ public class BaseInformationServiceImpl implements BaseInformationService {
         Page<Comp> compListPage = compMapper.queryCompetitionList(compDTO);
         PageInfo<Comp> pageInfo = new PageInfo<>(compListPage);
         List<Comp> compList = pageInfo.getList();
-        try {
-            List<CompVO> compVOList = CompTransformUtil.entity2VoList(compList);
-            return CommonResultUtil.returnTrue(pageInfo.getTotal(), compDTO.getPageNumber(), compVOList);
-        } catch (Exception e) {
-            log.warn(e.getMessage(), e);
-            return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_TYPE_ILLEGAL);
-        }
+        List<CompVO> compVOList = CompTransformUtil.entity2VoList(compList);
+        return CommonResultUtil.returnTrue(pageInfo.getTotal(), compDTO.getPageNumber(), compVOList);
     }
 
     /**
@@ -116,13 +105,8 @@ public class BaseInformationServiceImpl implements BaseInformationService {
         Page<Comp> compListPage = compMapper.queryMyCompetitionList(compDTO);
         PageInfo<Comp> pageInfo = new PageInfo<>(compListPage);
         List<Comp> compList = pageInfo.getList();
-        try {
-            List<CompVO> compVOList = CompTransformUtil.entity2VoList(compList);
-            return CommonResultUtil.returnTrue(pageInfo.getTotal(), compDTO.getPageNumber(), compVOList);
-        } catch (Exception e) {
-            log.warn(e.getMessage(), e);
-            return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_TYPE_ILLEGAL);
-        }
+        List<CompVO> compVOList = CompTransformUtil.entity2VoList(compList);
+        return CommonResultUtil.returnTrue(pageInfo.getTotal(), compDTO.getPageNumber(), compVOList);
     }
 
     /**

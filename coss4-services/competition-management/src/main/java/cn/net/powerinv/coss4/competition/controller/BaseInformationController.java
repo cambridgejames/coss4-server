@@ -43,13 +43,13 @@ public class BaseInformationController {
     @ResponseBody
     @PostMapping("/createCompetition")
     public Map<String, Object> createCompetition(@RequestBody CompDTO compDTO) {
-        if (StringUtils.isEmpty(compDTO.getCompName()) || ObjectUtils.isEmpty(compDTO.getStartTime())
-                || ObjectUtils.isEmpty(compDTO.getDetailedInformation())
-                || ObjectUtils.isEmpty(compDTO.getCompState())) {
-            return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
-        }
-        if (compDTO.getCompState() != 10 && compDTO.getCompState() != 20) {
+        if (ObjectUtils.isEmpty(compDTO.getCompState())) {
+            compDTO.setCompState(20);
+        } else if (compDTO.getCompState() != 10 && compDTO.getCompState() != 20) {
             return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_ILLEGAL);
+        }
+        if (StringUtils.isEmpty(compDTO.getCompName()) || ObjectUtils.isEmpty(compDTO.getStartTime())) {
+            return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
         }
         Comp comp = CompTransformUtil.vo2Entity(compDTO);
         comp.setCreateTime(new Date());

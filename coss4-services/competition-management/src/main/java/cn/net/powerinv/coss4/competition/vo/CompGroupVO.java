@@ -5,21 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompVO {
+public class CompGroupVO implements Serializable {
     private Integer id;
-    private String compName;
-    private Date startTime;
-    private Integer userId;
-    private String imageUrl;
-    private Boolean endingSign;
-    private Boolean enterSign;
-    private Integer compState;
-    private String detailedInformation;
+    private String groupName;
+    private Integer compId;
+    private Integer priority;
+    private JSONObject detailRule;
     private Date createTime;
     private Date updateTime;
 }
