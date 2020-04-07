@@ -7,7 +7,6 @@ import cn.net.powerinv.coss4.competition.entity.CompGroupExt;
 import cn.net.powerinv.coss4.competition.service.CompetitionGroupService;
 import cn.net.powerinv.coss4.competition.vo.CompDTO;
 import cn.net.powerinv.coss4.competition.vo.CompGroupDTO;
-import cn.net.powerinv.coss4.entity.CompGroup;
 import cn.net.powerinv.coss4.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;

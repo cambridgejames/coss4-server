@@ -2,8 +2,6 @@ package cn.net.powerinv.coss4.competition.service;
 
 import cn.net.powerinv.coss4.competition.entity.CompGroupExt;
 import cn.net.powerinv.coss4.competition.vo.CompDTO;
-import cn.net.powerinv.coss4.competition.vo.CompGroupDTO;
-import cn.net.powerinv.coss4.entity.CompGroup;
 
 import java.util.Map;
 

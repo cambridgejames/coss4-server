@@ -3,16 +3,12 @@ package cn.net.powerinv.coss4.competition.service.impl;
 import cn.net.powerinv.coss4.basic.util.CommonResultUtil;
 import cn.net.powerinv.coss4.basic.util.MessageCode;
 import cn.net.powerinv.coss4.competition.base.util.CompGroupTransformUtil;
-import cn.net.powerinv.coss4.competition.base.util.CompTransformUtil;
 import cn.net.powerinv.coss4.competition.entity.CompGroupExt;
 import cn.net.powerinv.coss4.competition.mapper.CompGroupMapper;
 import cn.net.powerinv.coss4.competition.mapper.LinkGroupPlayerMapper;
 import cn.net.powerinv.coss4.competition.service.CompetitionGroupService;
 import cn.net.powerinv.coss4.competition.vo.CompDTO;
-import cn.net.powerinv.coss4.competition.vo.CompGroupDTO;
 import cn.net.powerinv.coss4.competition.vo.CompGroupVO;
-import cn.net.powerinv.coss4.competition.vo.CompVO;
-import cn.net.powerinv.coss4.entity.Comp;
 import cn.net.powerinv.coss4.entity.CompGroup;
 import cn.net.powerinv.coss4.entity.LinkGroupPlayer;
 import com.github.pagehelper.Page;
@@ -55,7 +51,7 @@ public class CompetitionGroupServiceImpl implements CompetitionGroupService {
         if (compGroupMapper.insertWithCheck(compGroupExt) != 1) {
             return CommonResultUtil.returnFalse(MessageCode.OTHER_ERROR);
         }
-        return CommonResultUtil.returnTrue(CompGroupTransformUtil.entity2Vo((CompGroup) compGroupExt));
+        return CommonResultUtil.returnTrue(CompGroupTransformUtil.entity2Vo(compGroupExt));
     }
 
     /**
