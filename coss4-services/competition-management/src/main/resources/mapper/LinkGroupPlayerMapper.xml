@@ -130,4 +130,9 @@
     delete from link_group_player
     where group_id = #{groupId,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteByPlayerId" parameterType="cn.net.powerinv.coss4.entity.LinkGroupPlayer">
+    delete from link_group_player
+    where player_id = #{playerId,jdbcType=INTEGER}
+  </delete>
 </mapper>
