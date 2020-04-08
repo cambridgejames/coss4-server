@@ -53,7 +53,7 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="link_group_player"
+        <table tableName="user_player"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

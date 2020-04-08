@@ -6,12 +6,13 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="comp_id" jdbcType="INTEGER" property="compId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, `password`, image_url, user_id, create_time, update_time
+    id, user_name, `password`, image_url, comp_id, user_id, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,11 +29,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user_player (user_name, `password`, image_url, 
-      user_id, create_time, update_time
-      )
+      comp_id, user_id, create_time, 
+      update_time)
     values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{compId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.net.powerinv.coss4.entity.UserPlayer">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -48,6 +49,9 @@
       </if>
       <if test="imageUrl != null">
         image_url,
+      </if>
+      <if test="compId != null">
+        comp_id,
       </if>
       <if test="userId != null">
         user_id,
@@ -68,6 +72,9 @@
       </if>
       <if test="imageUrl != null">
         #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="compId != null">
+        #{compId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
@@ -92,6 +99,9 @@
       <if test="imageUrl != null">
         image_url = #{imageUrl,jdbcType=VARCHAR},
       </if>
+      <if test="compId != null">
+        comp_id = #{compId,jdbcType=INTEGER},
+      </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
@@ -109,9 +119,167 @@
     set user_name = #{userName,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
       image_url = #{imageUrl,jdbcType=VARCHAR},
+      comp_id = #{compId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 带有合法性校验的插入操作 -->
+  <insert id="insertSelective" parameterType="cn.net.powerinv.coss4.competition.entity.UserPlayerExt">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_player
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="compId != null">
+        comp_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="compId != null">
+        #{compId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    where exists
+    (
+      select * from comp t
+      where t.id = #{compId,jdbcType=INTEGER}
+      and t.user_id = #{uid,jdbcType=INTEGER}
+      and t.comp_state &lt;&gt; 30
+    )
+  </insert>
+
+  <!-- 更新参赛选手信息 -->
+  <update id="updateWithCheck" parameterType="cn.net.powerinv.coss4.competition.entity.UserPlayerExt">
+    update user_player u
+    <set>
+      <if test="userName != null">
+        u.user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        u.image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        u.user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        u.create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        u.update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where u.id = #{id,jdbcType=INTEGER}
+    and exists
+    (
+      select * from comp t
+      where t.id = #{compId,jdbcType=INTEGER}
+      and t.user_id = #{uid,jdbcType=INTEGER}
+      and t.comp_state &lt;&gt; 30
+    )
+  </update>
+
+  <!-- 查询选手信息 -->
+  <select id="selectWithCheck" parameterType="cn.net.powerinv.coss4.competition.entity.UserPlayerExt" resultMap="BaseResultMap">
+    select u.id, u.user_name, u.`password`, u.image_url, u.comp_id, u.user_id, u.create_time, u.update_time
+    from user_player u
+    left join comp g on g.id = u.comp_id
+    where u.id = #{id,jdbcType=INTEGER}
+    and g.user_id = #{uid,jdbcType=INTEGER}
+    and g.comp_state &lt;&gt; 30
+  </select>
+
+  <select id="queryPlayerList" parameterType="cn.net.powerinv.coss4.competition.vo.UserPlayerDTO" resultMap="BaseResultMap">
+    select u.id, u.user_name, u.`password`, u.image_url, u.comp_id, u.user_id, u.create_time, u.update_time
+    from user_player u
+    left join comp g on g.id = u.comp_id
+    where u.comp_id = #{compId,jdbcType=INTEGER}
+    and g.user_id = #{uid,jdbcType=INTEGER}
+    and g.comp_state &lt;&gt; 30
+    <if test="groupId != null">
+      and exists
+      (
+        select * from link_group_player l
+        where l.group_id = #{groupId,jdbcType=INTEGER}
+        and l.player_id = u.id
+      )
+    </if>
+    <if test="userName != null">
+      and u.user_name like CONCAT('%', #{userName,jdbcType=VARCHAR}, '%')
+    </if>
+    order by
+    <choose>
+      <when test="sortType == 'USER_NAME'">
+        u.user_name
+      </when>
+      <when test="sortType == 'CREATE_TIME'">
+        u.create_time
+      </when>
+      <when test="sortType == 'UPDATE_TIME'">
+        u.update_time
+      </when>
+      <otherwise>
+        u.id
+      </otherwise>
+    </choose>
+    <choose>
+      <when test="sortOrder == false">
+        DESC
+      </when>
+      <otherwise>
+        ASC
+      </otherwise>
+    </choose>
+  </select>
+
+  <delete id="deleteWithCheck" parameterType="cn.net.powerinv.coss4.competition.entity.UserPlayerExt">
+    delete u from user_player u
+    where u.id = #{id,jdbcType=INTEGER}
+    and exists
+    (
+      select * from comp t
+      where t.id = #{compId,jdbcType=INTEGER}
+      and t.user_id = #{uid,jdbcType=INTEGER}
+      and t.comp_state &lt;&gt; 30
+    )
+  </delete>
+
 </mapper>

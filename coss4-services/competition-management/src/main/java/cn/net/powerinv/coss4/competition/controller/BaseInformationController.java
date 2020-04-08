@@ -95,7 +95,7 @@ public class BaseInformationController {
                     .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
             User user = (User) request.getSession().getAttribute("user");
             if (user == null) {
-                return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
+                return CommonResultUtil.returnFalse(MessageCode.TOKEN_NOT_FOUND);
             }
             compDTO.setUid(user.getId());
         }
