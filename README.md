@@ -1,4 +1,4 @@
-![Gf6neO.th.png](https://s1.ax1x.com/2020/04/08/Gf6neO.th.png)
+![GfgzOP.png](https://s1.ax1x.com/2020/04/08/GfgzOP.png)
 # 竞赛在线评分系统 COSS
 
 ![](https://img.shields.io/github/languages/code-size/cambridgejames/coss4-server)
