@@ -18,4 +18,6 @@ public interface LinkGroupPlayerMapper {
     int updateByPrimaryKey(LinkGroupPlayer record);
 
     int deleteByGroupId(LinkGroupPlayer record);
+
+    int deleteByPlayerId(LinkGroupPlayer record);
 }

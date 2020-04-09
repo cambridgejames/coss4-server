@@ -53,7 +53,7 @@ public class PlayerController {
         if (user == null) {
             return CommonResultUtil.returnFalse(MessageCode.TOKEN_NOT_FOUND);
         }
-        String password = UUID.fromString(userPlayerDTO.toString()).toString().substring(0, 8);
+        String password = UUID.nameUUIDFromBytes(userPlayerDTO.toString().getBytes()).toString().substring(0, 8);
         UserPlayerExt userPlayerExt = (UserPlayerExt) UserPlayerTransformUtil.vo2Entity(userPlayerDTO,
                 UserPlayerTransformUtil.WITHOUT_PID);
         userPlayerExt.setPassword(password);

@@ -19,10 +19,12 @@ public class UserPlayerDTO extends PageHelperDTO {
     @Override
     public String toString() {
         return "UserPlayerDTO{" +
-                "userName='" + userName + '\'' +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", compId=" + compId +
                 ", userId=" + userId +
+                ", groupId=" + groupId +
                 '}';
     }
 }

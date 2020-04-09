@@ -84,7 +84,7 @@ public class PlayerServiceImpl implements PlayerService {
         if (userPlayer == null) {
             return CommonResultUtil.returnFalse(MessageCode.OTHER_ERROR);
         }
-        return null;
+        return CommonResultUtil.returnTrue(UserPlayerTransformUtil.entity2Vo(userPlayer));
     }
 
     /**
@@ -118,7 +118,7 @@ public class PlayerServiceImpl implements PlayerService {
         // 如果能执行到这里说明uid一定校验通过了，所以不需要再校验
         LinkGroupPlayer linkGroupPlayer = new LinkGroupPlayer();
         linkGroupPlayer.setPlayerId(userPlayerExt.getId());
-        linkGroupPlayerMapper.deleteByGroupId(linkGroupPlayer);
+        linkGroupPlayerMapper.deleteByPlayerId(linkGroupPlayer);
         return CommonResultUtil.returnTrue();
     }
 
