@@ -1,5 +1,6 @@
 package cn.net.powerinv.coss4.competition.mapper;
 
+import cn.net.powerinv.coss4.competition.vo.LinkGroupPlayerDTO;
 import cn.net.powerinv.coss4.entity.LinkGroupPlayer;
 import org.springframework.stereotype.Component;
 
@@ -20,4 +21,6 @@ public interface LinkGroupPlayerMapper {
     int deleteByGroupId(LinkGroupPlayer record);
 
     int deleteByPlayerId(LinkGroupPlayer record);
+
+    int insertWithCheck(LinkGroupPlayerDTO linkGroupPlayerDTO);
 }
