@@ -36,4 +36,32 @@ public class PlayerDistributionServiceImpl implements PlayerDistributionService 
         linkGroupPlayerDTO.setUserId(null);
         return CommonResultUtil.returnTrue(linkGroupPlayerDTO);
     }
+
+    /**
+     * 将制定选手从指定选手分组中移除
+     *
+     * @param linkGroupPlayerDTO 分组信息
+     * @return 删除结果
+     */
+    @Override
+    public Map<String, Object> removeGroup(LinkGroupPlayerDTO linkGroupPlayerDTO) {
+        if (linkGroupPlayerMapper.removeGroupWithCheck(linkGroupPlayerDTO) != 1) {
+            return CommonResultUtil.returnFalse(MessageCode.OTHER_ERROR);
+        }
+        return CommonResultUtil.returnTrue();
+    }
+
+    /**
+     * 修改选手作品信息
+     *
+     * @param linkGroupPlayerDTO 作品信息
+     * @return 更新结果
+     */
+    @Override
+    public Map<String, Object> updateWork(LinkGroupPlayerDTO linkGroupPlayerDTO) {
+        if (linkGroupPlayerMapper.updateWorkWithCheck(linkGroupPlayerDTO) != 1) {
+            return CommonResultUtil.returnFalse(MessageCode.OTHER_ERROR);
+        }
+        return CommonResultUtil.returnTrue();
+    }
 }

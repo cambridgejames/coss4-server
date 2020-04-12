@@ -12,4 +12,18 @@ public interface PlayerDistributionService {
      * @return 添加结果
      */
     Map<String, Object> addGroupForPlayer(LinkGroupPlayerDTO linkGroupPlayerDTO);
+
+    /**
+     * 将制定选手从指定选手分组中移除
+     * @param linkGroupPlayerDTO 分组信息
+     * @return 删除结果
+     */
+    Map<String, Object> removeGroup(LinkGroupPlayerDTO linkGroupPlayerDTO);
+
+    /**
+     * 修改选手作品信息
+     * @param linkGroupPlayerDTO 作品信息
+     * @return 更新结果
+     */
+    Map<String, Object> updateWork(LinkGroupPlayerDTO linkGroupPlayerDTO);
 }

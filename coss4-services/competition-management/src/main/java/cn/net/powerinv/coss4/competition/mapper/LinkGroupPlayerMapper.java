@@ -23,4 +23,8 @@ public interface LinkGroupPlayerMapper {
     int deleteByPlayerId(LinkGroupPlayer record);
 
     int insertWithCheck(LinkGroupPlayerDTO linkGroupPlayerDTO);
+
+    int removeGroupWithCheck(LinkGroupPlayerDTO linkGroupPlayerDTO);
+
+    int updateWorkWithCheck(LinkGroupPlayerDTO linkGroupPlayerDTO);
 }
