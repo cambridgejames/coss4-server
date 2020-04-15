@@ -135,4 +135,129 @@
     delete from link_group_player
     where player_id = #{playerId,jdbcType=INTEGER}
   </delete>
+
+  <!-- 用户添加选手分组 -->
+  <insert id="insertWithCheck" parameterType="cn.net.powerinv.coss4.competition.vo.LinkGroupPlayerDTO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into link_group_player l
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        l.group_id,
+      </if>
+      <if test="playerId != null">
+        l.player_id,
+      </if>
+      <if test="workName != null">
+        l.work_name,
+      </if>
+      <if test="imageUrl != null">
+        l.image_url,
+      </if>
+      <if test="state != null">
+        l.`state`,
+      </if>
+      <if test="createTime != null">
+        l.create_time,
+      </if>
+      <if test="updateTime != null">
+        l.update_time,
+      </if>
+    </trim>
+    <trim prefix="select " suffix=" from dual" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="playerId != null">
+        #{playerId,jdbcType=INTEGER},
+      </if>
+      <if test="workName != null">
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    where exists
+    (
+      select * from comp_group
+      left join comp on comp.id = comp_group.comp_id
+      where comp.user_id = #{userId,jdbcType=INTEGER}
+      and comp_group.id = #{groupId,jdbcType=INTEGER}
+      and comp.comp_state &lt;&gt; 30
+    )
+    or
+    (
+      l.user_id = #{userId,jdbcType=INTEGER}
+      and exists
+      (
+        select * from comp_group
+        left join comp on comp.id = comp_group.comp_id
+        where comp_group.id = #{groupId,jdbcType=INTEGER}
+        and comp.enter_sign = 1
+        and comp.comp_state &lt;&gt; 30
+      )
+    )
+  </insert>
+
+  <!-- 将选手从分组中移除 -->
+  <delete id="removeGroupWithCheck" parameterType="cn.net.powerinv.coss4.competition.vo.LinkGroupPlayerDTO">
+    delete l from link_group_player l
+    where l.group_id = #{groupId,jdbcType=INTEGER}
+    and l.player_id = #{playerId,jdbcType=INTEGER}
+    and exists
+    (
+      select * from comp_group
+      left join comp on comp.id = comp_group.comp_id
+      where comp.user_id = #{userId,jdbcType=INTEGER}
+      and comp_group.id = #{groupId,jdbcType=INTEGER}
+      and comp.comp_state &lt;&gt; 30
+    )
+    or
+    (
+      l.user_id = #{userId,jdbcType=INTEGER}
+      and exists
+      (
+        select * from comp_group
+        left join comp on comp.id = comp_group.comp_id
+        where comp_group.id = #{groupId,jdbcType=INTEGER}
+        and comp.enter_sign = 1
+        and comp.comp_state &lt;&gt; 30
+      )
+    )
+  </delete>
+
+  <!-- 修改选手的作品信息 -->
+  <update id="updateWorkWithCheck" parameterType="cn.net.powerinv.coss4.competition.vo.LinkGroupPlayerDTO">
+    update link_group_player l
+    <set>
+      <if test="workName != null">
+        l.work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        l.image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where l.group_id = #{groupId,jdbcType=INTEGER}
+    and l.player_id = #{playerId,jdbcType=INTEGER}
+    and exists
+    (
+      select * from comp_group
+      left join comp on comp.id = comp_group.comp_id
+      where comp.user_id = #{userId,jdbcType=INTEGER}
+      and comp_group.id = #{groupId,jdbcType=INTEGER}
+      and comp.comp_state &lt;&gt; 30
+    )
+    or l.user_id = #{userId,jdbcType=INTEGER}
+  </update>
 </mapper>

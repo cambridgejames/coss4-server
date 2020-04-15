@@ -127,7 +127,7 @@
   </update>
 
   <!-- 带有合法性校验的插入操作 -->
-  <insert id="insertSelective" parameterType="cn.net.powerinv.coss4.competition.entity.UserPlayerExt">
+  <insert id="insertWithCheck" parameterType="cn.net.powerinv.coss4.competition.entity.UserPlayerExt">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -155,7 +155,7 @@
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    <trim prefix="select " suffix=" from dual" suffixOverrides=",">
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
@@ -211,7 +211,7 @@
     and exists
     (
       select * from comp t
-      where t.id = #{compId,jdbcType=INTEGER}
+      where t.id = u.comp_id
       and t.user_id = #{uid,jdbcType=INTEGER}
       and t.comp_state &lt;&gt; 30
     )
@@ -232,7 +232,7 @@
     from user_player u
     left join comp g on g.id = u.comp_id
     where u.comp_id = #{compId,jdbcType=INTEGER}
-    and g.user_id = #{uid,jdbcType=INTEGER}
+    and g.user_id = #{userId,jdbcType=INTEGER}
     and g.comp_state &lt;&gt; 30
     <if test="groupId != null">
       and exists
@@ -260,14 +260,7 @@
         u.id
       </otherwise>
     </choose>
-    <choose>
-      <when test="sortOrder == false">
-        DESC
-      </when>
-      <otherwise>
-        ASC
-      </otherwise>
-    </choose>
+    ASC
   </select>
 
   <delete id="deleteWithCheck" parameterType="cn.net.powerinv.coss4.competition.entity.UserPlayerExt">
@@ -276,7 +269,7 @@
     and exists
     (
       select * from comp t
-      where t.id = #{compId,jdbcType=INTEGER}
+      where t.id = u.comp_id
       and t.user_id = #{uid,jdbcType=INTEGER}
       and t.comp_state &lt;&gt; 30
     )

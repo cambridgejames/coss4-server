@@ -43,7 +43,7 @@ public class ImageVerificationController {
      * @param verificationCodeDTO 待验证的图片验证码
      * @return 验证结果（正确/错误）
      */
-    @GetMapping("/checkCaseSensitive")
+    @PutMapping("/checkCaseSensitive")
     @ResponseBody
     public Map<String, Object> checkCaseSensitive(@RequestBody VerificationCodeDTO verificationCodeDTO) {
         String code = verificationCodeDTO.getCode();
@@ -58,7 +58,7 @@ public class ImageVerificationController {
      * @param verificationCodeDTO 待验证的图片验证码
      * @return 验证结果（正确/错误）
      */
-    @GetMapping("/checkCaseInsensitive")
+    @PutMapping("/checkCaseInsensitive")
     @ResponseBody
     public Map<String, Object> checkCaseInsensitive(@RequestBody VerificationCodeDTO verificationCodeDTO) {
         String code = verificationCodeDTO.getCode();
