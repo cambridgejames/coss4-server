@@ -2,8 +2,8 @@ package cn.net.powerinv.coss4.service.impl;
 
 import cn.net.powerinv.coss4.basic.util.CommonResultUtil;
 import cn.net.powerinv.coss4.basic.util.MessageCode;
-import cn.net.powerinv.coss4.entity.Users;
-import cn.net.powerinv.coss4.entity.mapper.UsersMapper;
+import cn.net.powerinv.coss4.entity.User;
+import cn.net.powerinv.coss4.mapper.UserMapper;
 import cn.net.powerinv.coss4.service.LoginAndLogoutService;
 import cn.net.powerinv.coss4.vo.ThirdPartyDTO;
 import cn.net.powerinv.coss4.vo.UserDTO;
@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Objects;
 
@@ -22,11 +23,11 @@ import java.util.Objects;
 @Service
 public class LoginAndLogoutServiceImpl implements LoginAndLogoutService {
 
-    private UsersMapper usersMapper;
+    private UserMapper userMapper;
 
     @Autowired
-    public void setUsersMapper(UsersMapper usersMapper) {
-        this.usersMapper = usersMapper;
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 
     /**
@@ -37,12 +38,12 @@ public class LoginAndLogoutServiceImpl implements LoginAndLogoutService {
      */
     @Override
     public Map<String, Object> loginWithUsualInfo(UserDTO userDTO) {
-        Users users = new Users();
-        users.setUserName(userDTO.getUsername());
-        users.seteMail(userDTO.getEMail());
-        users.setPasswd(userDTO.getPassword());
+        User user = new User();
+        user.setUserName(userDTO.getUsername());
+        user.seteMail(userDTO.getEMail());
+        user.setPasswd(userDTO.getPassword());
 
-        UserVO newUser = usersMapper.selectSelective(users);
+        User newUser = userMapper.selectSelective(user);
         if (newUser == null) {
             return CommonResultUtil.returnFalse(MessageCode.USERNAME_OR_PASSWORD_NOT_TRUE);
         }
@@ -50,7 +51,8 @@ public class LoginAndLogoutServiceImpl implements LoginAndLogoutService {
         // 将用户信息存入session
         HttpServletRequest request = ((ServletRequestAttributes) Objects
                 .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        request.getSession().setAttribute("user", newUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", newUser);
 
         return CommonResultUtil.returnTrue(newUser);
     }

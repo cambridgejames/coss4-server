@@ -2,6 +2,10 @@ server:
   port: 8803
   servlet:
     context-path: /user-management
+    session:
+      timeout: 120
+      cookie:
+        path: /
 
 spring:
   application:
@@ -11,14 +15,28 @@ spring:
     password: MysqlCossuser123Cloud!@#
     url: jdbc:mysql://139.199.36.160:3306/coss_dev?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
     driver-class-name: com.mysql.jdbc.Driver
+  data:
+    mongodb:
+      host: 139.199.36.160
+      port: 27017
+      database: coss4_dev
+  session:
+    store-type: mongodb
+    jdbc:
+      table-name: sessions
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/
 
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: cn.net.powerinv.coss4.entity
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.0.59:8000/eureka/
+
+feign:
+  hystrix:
+    enabled: true

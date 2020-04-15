@@ -2,12 +2,29 @@ server:
   port: 8802
   servlet:
     context-path: /verification-code
+    session:
+      timeout: 120
+      cookie:
+        path: /
 
 spring:
   application:
     name: eureka-client-verification-code
+  data:
+    mongodb:
+      host: 139.199.36.160
+      port: 27017
+      database: coss4_dev
+  session:
+    store-type: mongodb
+    jdbc:
+      table-name: sessions
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8000/eureka/
+      defaultZone: http://192.168.0.59:8000/eureka/
+
+feign:
+  hystrix:
+    enabled: true

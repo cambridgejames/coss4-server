@@ -1,10 +1,7 @@
 package cn.net.powerinv.coss4.service;
 
-import cn.net.powerinv.coss4.entity.Users;
+import cn.net.powerinv.coss4.entity.User;
 import cn.net.powerinv.coss4.vo.PasswordDTO;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
@@ -14,7 +11,7 @@ public interface BaseInformationService {
      * @param user 用户基本信息
      * @return 注册操作结果
      */
-    Map<String, Object> signUp(Users user);
+    Map<String, Object> signUp(User user);
 
     /**
      * 查询用户基本信息
@@ -28,7 +25,7 @@ public interface BaseInformationService {
      * @param user 更新后的用户基本信息
      * @return 信息更新结果
      */
-    Map<String, Object> updateBaseInfo(Users user);
+    Map<String, Object> updateBaseInfo(User user);
 
     /**
      * 修改密码

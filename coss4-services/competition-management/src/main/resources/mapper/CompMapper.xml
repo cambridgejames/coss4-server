@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.net.powerinv.coss4.competition.mapper.CompMapper">
+  <resultMap id="BaseResultMap" type="cn.net.powerinv.coss4.entity.Comp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="comp_name" jdbcType="VARCHAR" property="compName" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="ending_sign" jdbcType="BIT" property="endingSign" />
+    <result column="enter_sign" jdbcType="BIT" property="enterSign" />
+    <result column="comp_state" jdbcType="INTEGER" property="compState" />
+    <result column="detailed_information" jdbcType="LONGVARCHAR" property="detailedInformation" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, comp_name, start_time, user_id, image_url, ending_sign, enter_sign, comp_state, detailed_information,
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from comp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.net.powerinv.coss4.entity.Comp">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comp (comp_name, start_time, user_id,
+      image_url, ending_sign, enter_sign, comp_state,
+      create_time, update_time, detailed_information
+      )
+    values (#{compName,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER},
+      #{imageUrl,jdbcType=VARCHAR}, #{endingSign,jdbcType=BIT}, #{enterSign,jdbcType=BIT}, #{compState,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{detailedInformation,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.net.powerinv.coss4.entity.Comp">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="compName != null">
+        comp_name,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="endingSign != null">
+        ending_sign,
+      </if>
+      <if test="enterSign != null">
+        enter_sign,
+      </if>
+      <if test="compState != null">
+        comp_state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="detailedInformation != null">
+        detailed_information,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="compName != null">
+        #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="endingSign != null">
+        #{endingSign,jdbcType=BIT},
+      </if>
+      <if test="enterSign != null">
+        #{enterSign,jdbcType=BIT},
+      </if>
+      <if test="compState != null">
+        #{compState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailedInformation != null">
+        #{detailedInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.net.powerinv.coss4.entity.Comp">
+    update comp
+    <set>
+      <if test="compName != null">
+        comp_name = #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="endingSign != null">
+        ending_sign = #{endingSign,jdbcType=BIT},
+      </if>
+      <if test="enterSign != null">
+        enter_sign = #{enterSign,jdbcType=BIT},
+      </if>
+      <if test="compState != null">
+        comp_state = #{compState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailedInformation != null">
+        detailed_information = #{detailedInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.net.powerinv.coss4.entity.Comp">
+    update comp
+    set comp_name = #{compName,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      ending_sign = #{endingSign,jdbcType=BIT},
+      enter_sign = #{enterSign,jdbcType=BIT},
+      comp_state = #{compState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      detailed_information = #{detailedInformation,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 查询竞赛列表 -->
+  <select id="queryCompetitionList" parameterType="cn.net.powerinv.coss4.competition.vo.CompDTO" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from comp t
+    <where>
+      t.comp_state &lt;&gt; 30
+      <choose>
+        <when test="cid != null">
+          and t.id = #{cid,jdbcType=INTEGER}
+        </when>
+        <otherwise>
+          <if test="compName != null">
+            and t.comp_name like CONCAT('%', #{compName,jdbcType=VARCHAR}, '%')
+          </if>
+          <if test="startTime != null">
+            and t.start_time = #{startTime,jdbcType=TIMESTAMP}
+          </if>
+          <if test="endingSign != null">
+            and t.ending_sign = #{endingSign,jdbcType=BIT}
+          </if>
+          <if test="enterSign != null">
+            and t.enter_sign = #{enterSign,jdbcType=BIT}
+          </if>
+        </otherwise>
+      </choose>
+    </where>
+    order by
+    <choose>
+      <when test="sortType == 'START_TIME'">
+        t.start_time
+      </when>
+      <when test="sortType == 'CREATE_TIME'">
+        t.create_time
+      </when>
+      <when test="sortType == 'UPDATE_TIME'">
+        t.update_time
+      </when>
+      <otherwise>
+        t.id
+      </otherwise>
+    </choose>
+    <choose>
+      <when test="sortOrder == false">
+        DESC
+      </when>
+      <otherwise>
+        ASC
+      </otherwise>
+    </choose>
+  </select>
+
+  <!-- 查询指定用户名下的竞赛列表 -->
+  <select id="queryMyCompetitionList" parameterType="cn.net.powerinv.coss4.competition.vo.CompDTO" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from comp t
+    where t.user_id = #{uid,jdbcType=INTEGER}
+    and t.comp_state &lt;&gt; 30
+    <choose>
+      <when test="cid != null">
+        and t.id = #{cid,jdbcType=INTEGER}
+      </when>
+      <otherwise>
+        <if test="compName != null">
+          and t.comp_name like CONCAT('%', #{compName,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="startTime != null">
+          and t.start_time = #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endingSign != null">
+          and t.ending_sign = #{endingSign,jdbcType=BIT}
+        </if>
+        <if test="enterSign != null">
+          and t.enter_sign = #{enterSign,jdbcType=BIT}
+        </if>
+      </otherwise>
+    </choose>
+    order by
+    <choose>
+      <when test="sortType == 'START_TIME'">
+        t.start_time
+      </when>
+      <when test="sortType == 'CREATE_TIME'">
+        t.create_time
+      </when>
+      <when test="sortType == 'UPDATE_TIME'">
+        t.update_time
+      </when>
+      <otherwise>
+        t.id
+      </otherwise>
+    </choose>
+    <choose>
+      <when test="sortOrder == false">
+        DESC
+      </when>
+      <otherwise>
+        ASC
+      </otherwise>
+    </choose>
+  </select>
+
+  <!-- 更新竞赛信息 -->
+  <update id="updateOwnCompetition" parameterType="cn.net.powerinv.coss4.entity.Comp">
+    update comp c
+    left join user u on u.id = #{userId, jdbcType=INTEGER}
+    <set>
+      <if test="compName != null">
+        c.comp_name = #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        c.start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageUrl != null">
+        c.image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="endingSign != null">
+        c.ending_sign = #{endingSign,jdbcType=BIT},
+      </if>
+      <if test="enterSign != null">
+        c.enter_sign = #{enterSign,jdbcType=BIT},
+      </if>
+      <if test="compState != null">
+        c.comp_state = #{compState,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        c.update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailedInformation != null">
+        c.detailed_information = #{detailedInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where c.id = #{id,jdbcType=INTEGER}
+    and (c.user_id = #{userId, jdbcType=INTEGER} or u.role_group = 0)
+    and c.comp_state &lt;&gt; 30
+  </update>
+
+  <!-- 删除竞赛信息 -->
+  <update id="deleteOwnByPrimaryKey" parameterType="cn.net.powerinv.coss4.entity.Comp">
+    update comp c
+    left join user u on u.id = #{userId, jdbcType=INTEGER}
+    set c.comp_state = 30
+    where c.id = #{id,jdbcType=INTEGER}
+    and (c.user_id = #{userId, jdbcType=INTEGER} or u.role_group = 0)
+    and c.comp_state &lt;&gt; 30
+  </update>
+</mapper>

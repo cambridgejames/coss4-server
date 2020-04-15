@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.net.powerinv.coss4.dictionary.mapper.CompRubricMapper">
+  <resultMap id="BaseResultMap" type="cn.net.powerinv.coss4.entity.CompRubric">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="comp_rubric_name" jdbcType="VARCHAR" property="compRubricName" />
+    <result column="min_value" jdbcType="INTEGER" property="minValue" />
+    <result column="max_value" jdbcType="INTEGER" property="maxValue" />
+    <result column="accuracy" jdbcType="INTEGER" property="accuracy" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, comp_rubric_name, min_value, max_value, accuracy, weight, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comp_rubric
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comp_rubric
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.net.powerinv.coss4.entity.CompRubric">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comp_rubric (comp_rubric_name, min_value, max_value, 
+      accuracy, weight, create_time, 
+      update_time)
+    values (#{compRubricName,jdbcType=VARCHAR}, #{minValue,jdbcType=INTEGER}, #{maxValue,jdbcType=INTEGER}, 
+      #{accuracy,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.net.powerinv.coss4.entity.CompRubric">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comp_rubric
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="compRubricName != null">
+        comp_rubric_name,
+      </if>
+      <if test="minValue != null">
+        min_value,
+      </if>
+      <if test="maxValue != null">
+        max_value,
+      </if>
+      <if test="accuracy != null">
+        accuracy,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="compRubricName != null">
+        #{compRubricName,jdbcType=VARCHAR},
+      </if>
+      <if test="minValue != null">
+        #{minValue,jdbcType=INTEGER},
+      </if>
+      <if test="maxValue != null">
+        #{maxValue,jdbcType=INTEGER},
+      </if>
+      <if test="accuracy != null">
+        #{accuracy,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.net.powerinv.coss4.entity.CompRubric">
+    update comp_rubric
+    <set>
+      <if test="compRubricName != null">
+        comp_rubric_name = #{compRubricName,jdbcType=VARCHAR},
+      </if>
+      <if test="minValue != null">
+        min_value = #{minValue,jdbcType=INTEGER},
+      </if>
+      <if test="maxValue != null">
+        max_value = #{maxValue,jdbcType=INTEGER},
+      </if>
+      <if test="accuracy != null">
+        accuracy = #{accuracy,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.net.powerinv.coss4.entity.CompRubric">
+    update comp_rubric
+    set comp_rubric_name = #{compRubricName,jdbcType=VARCHAR},
+      min_value = #{minValue,jdbcType=INTEGER},
+      max_value = #{maxValue,jdbcType=INTEGER},
+      accuracy = #{accuracy,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -16,6 +16,8 @@
         <module>coss4-common</module>
         <module>verification-code</module>
         <module>user-management</module>
+        <module>competition-management</module>
+        <module>system-dictionary</module>
     </modules>
 
     <packaging>pom</packaging>

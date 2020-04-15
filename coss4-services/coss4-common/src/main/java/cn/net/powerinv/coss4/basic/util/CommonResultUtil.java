@@ -1,6 +1,7 @@
 package cn.net.powerinv.coss4.basic.util;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +29,38 @@ public class CommonResultUtil {
      */
     public static Map<String, Object> returnTrue(Object msg) {
         Map<String, Object> returnMap = returnTrue();
+        returnMap.put("data", msg);
+        return returnMap;
+    }
+
+    /**
+     * 返回带有自定义的Object型数据列表的分页成功请求信息
+     * @param total 列表大小
+     * @param list 分页信息
+     * @return 成功请求信息，传入的msg将被放置在data字段中
+     */
+    public static <T> Map<String, Object> returnTrue(Long total, List<T> list) {
+        Map<String, Object> returnMap = returnTrue();
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("total", total);
+        msg.put("list", list);
+        returnMap.put("data", msg);
+        return returnMap;
+    }
+
+    /**
+     * 返回带有自定义的Object型数据列表的分页成功请求信息
+     * @param total 列表大小
+     * @param current 当前页码
+     * @param list 分页信息
+     * @return 成功请求信息，传入的msg将被放置在data字段中
+     */
+    public static <T> Map<String, Object> returnTrue(Long total, Integer current, List<T> list) {
+        Map<String, Object> returnMap = returnTrue();
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("total", total);
+        msg.put("current", current);
+        msg.put("list", list);
         returnMap.put("data", msg);
         return returnMap;
     }
