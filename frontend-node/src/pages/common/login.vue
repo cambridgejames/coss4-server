@@ -9,7 +9,7 @@
 
       <!-- 用户密码登录 -->
       <el-tab-pane label="用户密码登录">
-        <el-form ref="form" :model="form" status-icon label-width="92px" :rules="rules.userRule">
+        <el-form ref="form" :model="form.userLogin" status-icon label-width="92px" :rules="rules.userRule">
           <el-form-item label="用户名" prop="username">
             <el-input v-model="form.userLogin.username" placeholder="用户名/邮箱"></el-input>
           </el-form-item>
@@ -18,16 +18,16 @@
           </el-form-item>
           <el-form-item label="图片验证码" prop="verification">
             <el-col :span="16" style="padding-right: 14px;">
-              <el-input v-model="form.verification" placeholder="验证码不区分大小写"></el-input>
+              <el-input v-model="form.userLogin.verification" placeholder="验证码不区分大小写"></el-input>
             </el-col>
             <el-col :span="8" style="height: 40px;" title="点击刷新验证码">
               <img class="image-code" :src="form.image" alt="点击刷新验证码" @click="getImageVerification">
             </el-col>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="">登录</el-button>
+            <el-button type="primary" @click="loginWithUserLogin">登录</el-button>
             <el-button type="primary">注册</el-button>
-            <el-button>返回</el-button>
+            <el-button @click="goBack">返回</el-button>
             <el-link type="primary" :underline="false" style="float: right;">忘记密码？</el-link>
           </el-form-item>
         </el-form>
@@ -51,7 +51,7 @@
           </el-form-item>
           <el-form-item label="图片验证码" prop="verification">
             <el-col :span="16" style="padding-right: 14px;">
-              <el-input v-model="form.verification" placeholder="验证码不区分大小写"></el-input>
+              <el-input v-model="form.userLogin.verification" placeholder="验证码不区分大小写"></el-input>
             </el-col>
             <el-col :span="8" style="height: 40px;" title="点击刷新验证码">
               <img class="image-code" :src="form.image" alt="点击刷新验证码" @click="getImageVerification">
@@ -71,7 +71,7 @@
           <el-form-item>
             <el-button type="primary" @click="">登录</el-button>
             <el-button type="primary">注册</el-button>
-            <el-button>返回</el-button>
+            <el-button @click="goBack">返回</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -94,7 +94,7 @@
           </el-form-item>
           <el-form-item label="图片验证码" prop="verification">
             <el-col :span="16" style="padding-right: 14px;">
-              <el-input v-model="form.verification" placeholder="验证码不区分大小写"></el-input>
+              <el-input v-model="form.userLogin.verification" placeholder="验证码不区分大小写"></el-input>
             </el-col>
             <el-col :span="8" style="height: 40px;" title="点击刷新验证码">
               <img class="image-code" :src="form.image" alt="点击刷新验证码" @click="getImageVerification">
@@ -102,7 +102,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="">登录</el-button>
-            <el-button>返回</el-button>
+            <el-button @click="goBack">返回</el-button>
             <el-link type="primary" :underline="false" style="float: right;">忘记密码？</el-link>
           </el-form-item>
         </el-form>
@@ -112,13 +112,19 @@
       <el-tab-pane label="二维码安全登录">
         <div id="qr-code" class="qr-code"></div>
         <p style="font-size: 14px; text-align: center;">{{form.qrCodeLogin.message}}</p>
+        <div style="margin-top: 10px; text-align: center;">
+          <el-button @click="goBack">返回</el-button>
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+  import config from "../../assets/js/config";
+
   export default {
+    mixins: [config],
     data() {
       let imageVerificationRule = (rule, value, callback) => {
         let that = this;
@@ -145,20 +151,22 @@
       return {
         form: {
           image: '',
-          verification: '',
           userLogin: {
             username: '',
-            password: ''
+            password: '',
+            verification: ''
           },
           phoneLogin: {
             number: '',
             message: '',
+            verification: '',
             buttonText: '发送验证码'//重新发送 (60s)
           },
           playerLogin: {
             mode: false,
             username: '',
-            password: ''
+            password: '',
+            verification: ''
           },
           qrCodeLogin: {
             message: '请使用竞赛在线评分手机客户端扫描二维码登录'
@@ -196,14 +204,40 @@
       that.getImageVerification();
     },
     methods: {
+      /**
+       * 获取图片验证码
+       */
       getImageVerification() {
         let that = this;
         that.form.verification = '';
-        this.$axios.get('/api/verification-code/imageCode/getVerificationCode').then(result => {
+        that.$axios.get('/api/verification-code/imageCode/getVerificationCode').then(result => {
           if (result.data.code === 0) {
             that.form.image = result.data.data;
           }
         }).catch(err => {});
+      },
+      /**
+       * 用户密码登录
+       */
+      loginWithUserLogin() {
+        let that = this;
+        let data = {
+          username: that.form.userLogin.username,
+          password: that.form.userLogin.password
+        };
+        that.$axios.post('/api/user-management/entry/loginWithUsualInfo', data).then(result => {
+          if (result.data.code === 0) {
+            that.isLogin = true;
+            that.user = result.data.data;
+            that.flushUserInfo();
+            that.$message({showClose: true, message: '登陆成功', type: 'success'});
+            that.$router.push({path: that.$route.query.from});
+          }
+        }).catch(err => {});
+      },
+      goBack() {
+        let that = this;
+        that.$router.push({path: that.$route.query.from});
       }
     }
   }

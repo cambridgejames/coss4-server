@@ -8,10 +8,10 @@
           <el-menu-item index="/competition">竞赛</el-menu-item>
           <el-menu-item index="/community">社区</el-menu-item>
           <el-menu-item index="/wiki">教程</el-menu-item>
-          <el-menu-item index="/login" v-if="!isLogin" target="_blank">登录/注册</el-menu-item>
+          <el-menu-item :index="'/login?from=' + this.$route.path" v-if="!isLogin" target="_blank">登录/注册</el-menu-item>
           <el-submenu index="/user" v-else>
             <template slot="title">
-              <el-avatar size="medium" :src="user.avatar"></el-avatar>&nbsp;{{user.username}}
+              <el-avatar size="medium" :src="user.image"></el-avatar>&nbsp;{{user.userName}}
             </template>
             <el-menu-item index="/info">用户资料</el-menu-item>
             <el-menu-item index="/settings">设置</el-menu-item>
