@@ -16,7 +16,7 @@
             <el-menu-item index="/info">用户资料</el-menu-item>
             <el-menu-item index="/settings">设置</el-menu-item>
             <el-menu-item index="/help">帮助</el-menu-item>
-            <el-menu-item index="/exit">退出</el-menu-item>
+            <el-menu-item @click="clearUserInfo">退出</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

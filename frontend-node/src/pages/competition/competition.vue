@@ -1,5 +1,7 @@
 <template>
-    <div>竞赛</div>
+    <div id="competition-index-container" class="competition-container">
+        <div class="banner-container"></div>
+    </div>
 </template>
 
 <script>
@@ -8,6 +10,13 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.competition-container {
+    .banner-container {
+        height: 400px;
+        background-color: cornflowerblue;
+    }
+}
 
 </style>

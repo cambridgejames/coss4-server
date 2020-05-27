@@ -9,11 +9,11 @@
 
       <!-- 用户密码登录 -->
       <el-tab-pane label="用户密码登录">
-        <el-form ref="form" :model="form.userLogin" status-icon label-width="92px" :rules="rules.userRule">
-          <el-form-item label="用户名" prop="username">
+        <el-form ref="userLoginForm" :model="form.userLogin" status-icon label-width="92px" :rules="rules.userRule">
+          <el-form-item label="用户名" prop="username" :error="form.errorCode.userLoginError">
             <el-input v-model="form.userLogin.username" placeholder="用户名/邮箱"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password">
+          <el-form-item label="密码" prop="password" :error="form.errorCode.userLoginError">
             <el-input v-model="form.userLogin.password" placeholder="密码" show-password></el-input>
           </el-form-item>
           <el-form-item label="图片验证码" prop="verification">
@@ -44,14 +44,14 @@
 
       <!-- 短信验证码登录 -->
       <el-tab-pane label="短信验证码登录">
-        <el-form ref="form" :model="form" status-icon label-width="92px" :rules="rules.phoneRule">
+        <el-form ref="phoneLoginForm" :model="form.phoneLogin" status-icon label-width="92px" :rules="rules.phoneRule">
           <el-form-item label="手机" prop="number">
             <el-input v-model.number="form.phoneLogin.number" placeholder="手机号码"
                       maxlength="11" type="tel"></el-input>
           </el-form-item>
           <el-form-item label="图片验证码" prop="verification">
             <el-col :span="16" style="padding-right: 14px;">
-              <el-input v-model="form.userLogin.verification" placeholder="验证码不区分大小写"></el-input>
+              <el-input v-model="form.phoneLogin.verification" placeholder="验证码不区分大小写"></el-input>
             </el-col>
             <el-col :span="8" style="height: 40px;" title="点击刷新验证码">
               <img class="image-code" :src="form.image" alt="点击刷新验证码" @click="getImageVerification">
@@ -78,7 +78,7 @@
 
       <!-- 竞赛账号登录 -->
       <el-tab-pane label="竞赛账号登录">
-        <el-form ref="form" :model="form" status-icon label-width="92px" :rules="rules.playerRule">
+        <el-form ref="playerLoginForm" :model="form" status-icon label-width="92px" :rules="rules.playerRule">
           <el-form-item label="账号类型" prop="mode">
             <el-radio-group v-model="form.playerLogin.mode">
               <el-radio :label="false">参赛账号</el-radio>
@@ -94,7 +94,7 @@
           </el-form-item>
           <el-form-item label="图片验证码" prop="verification">
             <el-col :span="16" style="padding-right: 14px;">
-              <el-input v-model="form.userLogin.verification" placeholder="验证码不区分大小写"></el-input>
+              <el-input v-model="form.playerLogin.verification" placeholder="验证码不区分大小写"></el-input>
             </el-col>
             <el-col :span="8" style="height: 40px;" title="点击刷新验证码">
               <img class="image-code" :src="form.image" alt="点击刷新验证码" @click="getImageVerification">
@@ -122,9 +122,10 @@
 
 <script>
   import config from "../../assets/js/config";
+  import message from "../../assets/js/message";
 
   export default {
-    mixins: [config],
+    mixins: [config, message],
     data() {
       let imageVerificationRule = (rule, value, callback) => {
         let that = this;
@@ -170,6 +171,9 @@
           },
           qrCodeLogin: {
             message: '请使用竞赛在线评分手机客户端扫描二维码登录'
+          },
+          errorCode: {
+            userLoginError: ''
           }
         },
         rules: {
@@ -201,6 +205,9 @@
     },
     mounted() {
       let that = this;
+      if (that.getUserInfo() !== null) {
+        that.goBack();
+      }
       that.getImageVerification();
     },
     methods: {
@@ -225,15 +232,29 @@
           username: that.form.userLogin.username,
           password: that.form.userLogin.password
         };
-        that.$axios.post('/api/user-management/entry/loginWithUsualInfo', data).then(result => {
-          if (result.data.code === 0) {
-            that.isLogin = true;
-            that.user = result.data.data;
-            that.flushUserInfo();
-            that.$message({showClose: true, message: '登陆成功', type: 'success'});
-            that.$router.push({path: that.$route.query.from});
+        that.form.errorCode.userLoginError = '';
+        that.$refs['userLoginForm'].validate((valid) => {
+          if (valid) {
+            that.$axios.post('/api/user-management/entry/loginWithUsualInfo', data).then(result => {
+              if (result.data.code === 0) {
+                that.isLogin = true;
+                that.user = result.data.data;
+                that.flushUserInfo();
+                that.successMessage('登陆成功');
+                that.$router.push({path: that.$route.query.from});
+              } else {
+                that.form.errorCode.userLoginError = result.data.msg;
+                that.getImageVerification();
+                return false;
+              }
+            }).catch(err => {
+              that.errorMessage('请求失败');
+              return false;
+            });
+          } else {
+            return false;
           }
-        }).catch(err => {});
+        });
       },
       goBack() {
         let that = this;

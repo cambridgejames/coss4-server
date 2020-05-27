@@ -1,3 +1,5 @@
+import message from "./message";
+
 export default {
   data() {
     return {
@@ -10,7 +12,6 @@ export default {
   },
   methods: {
     flushUserInfo() {
-      console.log(this.user);
       this.isLogin = this.user !== null;
       localStorage.setItem('userInfo', JSON.stringify(this.user));
     },
@@ -22,8 +23,15 @@ export default {
       return this.user;
     },
     clearUserInfo() {
-      this.user = null;
-      this.flushUserInfo();
+      this.$confirm('确定要退出系统吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.user = null;
+        this.flushUserInfo();
+        message.successMessage('退出成功');
+      }).catch(() => {});
     }
   }
 }
