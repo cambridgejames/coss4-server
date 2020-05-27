@@ -1,0 +1,56 @@
+$condition-span-width: 60px;
+$list-theme-color: #ea562e;
+
+.list-container {
+    .list-input-box {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        .input-input {
+            width: 100%;
+            margin-right: 10px;
+        }
+    }
+
+    .list-condition {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        line-height: 24px;
+        font-size: 16px;
+        cursor: default;
+
+        .condition-span {
+            width: $condition-span-width;
+            min-width: $condition-span-width;
+            height: 24px;
+            border-left: solid 5px $list-theme-color;
+            text-align: right;
+            color: #999;
+        }
+        .condition-item {
+            width: 100%;
+            padding-left: 10px;
+
+            span {
+                height: 24px;
+                display: inline-block;
+                padding: 0 10px;
+                margin-bottom: 10px;
+                color: #666;
+                cursor: pointer;
+                &:hover {
+                    background-color: #eee;
+                }
+                &[class*=selected] {
+                    color: $list-theme-color !important;
+                }
+            }
+        }
+    }
+    .list-result {
+        margin-top: 40px;
+    }
+}
