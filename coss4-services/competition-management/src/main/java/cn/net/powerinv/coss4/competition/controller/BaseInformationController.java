@@ -62,7 +62,7 @@ public class BaseInformationController {
      * @return 竞赛详细信息
      */
     @ResponseBody
-    @GetMapping("/queryCompetition")
+    @PutMapping("/queryCompetition")
     public Map<String, Object> queryCompetition(@RequestBody CompDTO compDTO) {
         if (ObjectUtils.isEmpty(compDTO.getCid())) {
             return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
@@ -76,7 +76,7 @@ public class BaseInformationController {
      * @return 竞赛列表
      */
     @ResponseBody
-    @GetMapping("/queryCompetitionList")
+    @PutMapping("/queryCompetitionList")
     public Map<String, Object> queryCompetitionList(@RequestBody CompDTO compDTO) {
         return baseInformationService.queryCompetitionList(compDTO);
     }
@@ -87,7 +87,7 @@ public class BaseInformationController {
      * @return 竞赛列表
      */
     @ResponseBody
-    @GetMapping("/queryMyCompetitionList")
+    @PutMapping("/queryMyCompetitionList")
     public Map<String, Object> queryMyCompetitionList(@RequestBody CompDTO compDTO) {
         if (ObjectUtils.isEmpty(compDTO.getUid())) {
             // 如果没有传入uid则查询当前用户名下的列表

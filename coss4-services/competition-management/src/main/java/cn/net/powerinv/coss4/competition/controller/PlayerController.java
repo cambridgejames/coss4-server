@@ -94,7 +94,7 @@ public class PlayerController {
      * @return 查询结果
      */
     @ResponseBody
-    @GetMapping("/queryPlayerById")
+    @PutMapping("/queryPlayerById")
     public Map<String, Object> queryPlayerById(@RequestBody UserPlayerDTO userPlayerDTO) {
         if (ObjectUtils.isEmpty(userPlayerDTO.getId())) {
             return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
@@ -117,7 +117,7 @@ public class PlayerController {
      * @return 查询结果
      */
     @ResponseBody
-    @GetMapping("/queryPlayerList")
+    @PutMapping("/queryPlayerList")
     public Map<String, Object> queryPlayerList(@RequestBody UserPlayerDTO userPlayerDTO) {
         if (ObjectUtils.isEmpty(userPlayerDTO.getCompId())) {
             return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
