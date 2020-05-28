@@ -11,7 +11,8 @@
           <el-menu-item :index="'/login?from=' + this.$route.path" v-if="!isLogin" target="_blank">登录/注册</el-menu-item>
           <el-submenu index="/user" v-else>
             <template slot="title">
-              <el-avatar size="medium" :src="user.image"></el-avatar>&nbsp;{{user.userName}}
+              <el-avatar shape="square" size="small" :src="user.imageUrl" style="margin-right: 6px;"></el-avatar>
+              {{user.userName}}
             </template>
             <el-menu-item index="/info">用户资料</el-menu-item>
             <el-menu-item index="/settings">设置</el-menu-item>
