@@ -20,6 +20,10 @@ export default new Router({
           component: () => import('@/pages/competition/competition')
         },
         {
+          path: '/competition/:id',
+          component: () => import('@/pages/competition/competitionView')
+        },
+        {
           path: '/community',
           component: () => import('@/pages/community/community')
         },

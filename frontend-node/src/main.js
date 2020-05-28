@@ -21,11 +21,14 @@ Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/' || to.path === '/login' || to.path === '/competition'
-    || to.path === '/community' || to.path === '/wiki'
-    || localStorage.getItem("isLogin") === 'true') {
+    || to.path === '/community' || to.path === '/wiki') {
+    // 完全匹配
+    next();
+  } else if (to.path.indexOf('/competition/cm') === 0 && checkRate(to.path.substr(15))) {
+    // 匹配 /competition/cm:id
     next();
   } else {
-    next('/login');
+    next('/');
   }
 });
 
@@ -36,3 +39,9 @@ new Vue({
   components: { App },
   template: '<App/>'
 });
+
+function checkRate(number) {
+  //判断正整数/[1−9]+[0−9]∗]∗/
+  let re = /^[0-9]+.?[0-9]*/;
+  return re.test(number);
+}

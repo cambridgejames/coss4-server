@@ -84,7 +84,7 @@
       padding: 0 50px;
       background-color: #fff;
       border-bottom: 1px solid #dcdfe6;
-      z-index: 10000;
+      z-index: 100;
       .main-icon {
         float: left;
         height: 60px;

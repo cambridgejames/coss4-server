@@ -28,14 +28,14 @@
                 </div>
                 <div v-else v-for="item in items.list" class="result-item-box">
                     <div class="result-item-inner-box">
-                        <div class="item-image-box">
+                        <div class="item-image-box" @click="toCompetitionView(item.id)">
                             <el-image class="item-image" :src="item.imageUrl" fit="cover"></el-image>
                         </div>
                         <div class="item-info-box">
                             <div class="info-title-box">
                                 <el-tag size="small" :type="item.tagMode.type"
                                         style="width: 54px; min-width: 54px;">{{item.tagMode.content}}</el-tag>
-                                <span class="info-title">{{item.compName}}</span>
+                                <span class="info-title" @click="toCompetitionView(item.id)">{{item.compName}}</span>
                                 <span class="info-time">{{formatDate(new Date(item.createTime))}}</span>
                             </div>
                             <div class="holder-time-box">
@@ -127,6 +127,13 @@
                 }).catch(err => {
                     that.errorMessage('请求失败');
                 });
+            },
+            /**
+             * 跳转到竞赛详情页面
+             * @param id 竞赛ID
+             */
+            toCompetitionView(id) {
+                this.$router.push({path : '/competition/cm' + id});
             },
             /**
              * 获取字符串的哈希值
