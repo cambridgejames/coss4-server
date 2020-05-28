@@ -77,11 +77,13 @@
       top: 0;
       left: 0;
       right: 0;
+      min-width: 600px;
       height: 60px;
       line-height: 60px;
       padding: 0 50px;
       background-color: #fff;
       border-bottom: 1px solid #dcdfe6;
+      z-index: 10000;
       .main-icon {
         float: left;
         height: 60px;
