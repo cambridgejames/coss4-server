@@ -23,7 +23,8 @@
       </div>
     </div>
     <div id="main-container" class="main-container">
-      <router-view/>
+      <el-backtop></el-backtop>
+      <router-view style="min-height: 100vh;" />
     </div>
     <div id="main-footer" class="main-footer">
       <div style="max-width: 1200px; margin: 0 auto;">

@@ -6,6 +6,8 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import './assets/font/iconfont/iconfont.css';
+
 import Axios from 'axios';
 import VueCookies from 'vue-cookies';
 
@@ -21,7 +23,7 @@ Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/' || to.path === '/login' || to.path === '/competition'
-    || to.path === '/community' || to.path === '/wiki') {
+    || to.path === '/community' || to.path === '/wiki' || to.path === '/favicon.ico') {
     // 完全匹配
     next();
   } else if (to.path.indexOf('/competition/cm') === 0 && checkRate(to.path.substr(15))) {
