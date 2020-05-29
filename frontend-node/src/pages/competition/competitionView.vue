@@ -108,7 +108,7 @@
                 });
             },
             certificationResult() {
-                let newPage = this.$router.resolve({name: '/certification/result/cm' + this.competitionInfo.id});
+                let newPage = this.$router.resolve({path: '/certification/result/cm' + this.competitionInfo.id});
                 window.open(newPage.href, '_blank');
             },
             goBack() {

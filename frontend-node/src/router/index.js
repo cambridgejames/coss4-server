@@ -36,6 +36,21 @@ export default new Router({
     {
       path: '/login',
       component: () => import('@/pages/common/login')
+    },
+    {
+      path: '/certification',
+      redirect: '/certification',
+      component: () => import('@/pages/certification/certification'),
+      children: [
+        {
+          path: '/certification',
+          component: () => import('@/pages/certification/certificationHome')
+        },
+        {
+          path: '/certification/result/:id',
+          component: () => import('@/pages/certification/utils/result')
+        }
+      ]
     }
   ]
 })

@@ -23,11 +23,13 @@ Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/' || to.path === '/login' || to.path === '/competition'
-    || to.path === '/community' || to.path === '/wiki' || to.path === '/favicon.ico') {
+    || to.path === '/community' || to.path === '/wiki' || to.path === '/favicon.ico'
+    || to.path === '/certification') {
     // 完全匹配
     next();
-  } else if (to.path.indexOf('/competition/cm') === 0 && checkRate(to.path.substr(15))) {
-    // 匹配 /competition/cm:id
+  } else if (to.path.indexOf('/competition/cm') === 0 && checkRate(to.path.substr(15))
+      || to.path.indexOf('/certification/result/cm') === 0 && checkRate(to.path.substr(24))) {
+    // 匹配以 :id 结尾的url
     next();
   } else {
     next('/');
