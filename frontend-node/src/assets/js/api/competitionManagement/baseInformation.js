@@ -2,19 +2,26 @@ import message from "../../message";
 
 export default {
     name: 'baseInformation',
+    mixins: [message],
     methods: {
         queryCompetition(data, success, failed) {
+            let that = this;
             this.$axios.put('/api/competition-management/base/queryCompetition', data).then(result => {
                 if (result.data.code === 0) {
+                    if (!result.data.data.imageUrl) {
+                        let hashCode = getHashCode(result.data.data.compName) % 6 + 1;
+                        result.data.data.imageUrl = '/static/imgs/cover/competition-default-cover-' + hashCode + '.png';
+                    }
                     success(result.data.data);
                 } else if ('function' === typeof failed) {
                     failed(result.data.msg);
                 }
             }).catch(err => {
-                message.errorMessage('请求失败');
+                that.errorMessage('请求失败');
             });
         },
         queryCompetitionList(data, success, failed) {
+            let that = this;
             this.$axios.put('/api/competition-management/base/queryCompetitionList', data).then(result => {
                 if (result.data.code === 0) {
                     let items = result.data.data;
@@ -43,7 +50,7 @@ export default {
                     failed(result.data.msg);
                 }
             }).catch(err => {
-                message.errorMessage('请求失败');
+                that.errorMessage('请求失败');
             });
         }
     }

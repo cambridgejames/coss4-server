@@ -238,8 +238,8 @@
           if (valid) {
             that.loginWithUsualInfo(data, function() {
               that.$router.push({path: that.$route.query.from});
-            }, function() {
-              that.form.errorCode.userLoginError = result.data.msg;
+            }, function(msg) {
+              that.form.errorCode.userLoginError = msg;
               that.getImageVerification();
               return false;
             });
