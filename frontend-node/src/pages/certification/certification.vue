@@ -73,7 +73,7 @@
         padding: 0 50px;
         background-color: #fff;
         border-bottom: 1px solid #dcdfe6;
-        z-index: 100;
+        z-index: 2001;
         .main-icon {
             float: left;
             height: 60px;

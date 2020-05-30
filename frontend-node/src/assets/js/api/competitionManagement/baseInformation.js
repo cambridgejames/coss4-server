@@ -1,8 +1,9 @@
 import message from "../../message";
+import format from "../../format";
 
 export default {
     name: 'baseInformation',
-    mixins: [message],
+    mixins: [message, format],
     methods: {
         queryCompetition(data, success, failed) {
             let that = this;
@@ -11,6 +12,16 @@ export default {
                     if (!result.data.data.imageUrl) {
                         let hashCode = getHashCode(result.data.data.compName) % 6 + 1;
                         result.data.data.imageUrl = '/static/imgs/cover/competition-default-cover-' + hashCode + '.png';
+                    } else {
+                        result.data.data.imageUrl = that.formatImageUrl(result.data.data.imageUrl);
+                    }
+                    // 判断竞赛状态
+                    if (result.data.data.endingSign === true) {
+                        result.data.data.tagMode = {type: 'danger', content: '已结束'};
+                    } else if (new Date(result.data.data.startTime) > new Date()) {
+                        result.data.data.tagMode = {type: '', content: '未开始'};
+                    } else {
+                        result.data.data.tagMode = {type: 'success', content: '进行中'};
                     }
                     success(result.data.data);
                 } else if ('function' === typeof failed) {
@@ -30,6 +41,8 @@ export default {
                         if (!items.list[index].imageUrl) {
                             let hashCode = getHashCode(items.list[index].compName) % 6 + 1;
                             items.list[index].imageUrl = '/static/imgs/cover/competition-default-cover-' + hashCode + '.png';
+                        } else {
+                            items.list[index].imageUrl = that.formatImageUrl(items.list[index].imageUrl);
                         }
                         // 判断竞赛状态
                         if (items.list[index].endingSign === true) {
