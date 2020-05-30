@@ -67,9 +67,10 @@
 <script>
     import message from "../../assets/js/message";
     import format from "../../assets/js/format";
+    import baseInformation from "../../assets/js/api/competitionManager/baseInformation";
 
     export default {
-        mixins: [message, format],
+        mixins: [message, format, baseInformation],
         name: "competition",
         data() {
             return {
@@ -89,44 +90,20 @@
             }
         },
         mounted() {
-            this.queryCompetitionList();
+            this.queryCompetitionListImpl();
         },
         methods: {
             /**
              * 查询竞赛列表
              */
-            queryCompetitionList() {
+            queryCompetitionListImpl() {
                 let that = this;
                 let data = {
                     sortType: "START_TIME"
                 };
-                that.$axios.put('/api/competition-management/base/queryCompetitionList', data).then(result => {
-                    if (result.data.code === 0) {
-                        that.items = result.data.data;
-                        for (let index = 0; index < that.items.list.length; index++) {
-                            // 添加默认封面
-                            if (!that.items.list[index].imageUrl) {
-                                let hashCode = that.getHashCode(that.items.list[index].compName) % 6 + 1;
-                                that.items.list[index].imageUrl = '/static/imgs/cover/competition-default-cover-' + hashCode + '.png';
-                            }
-                            // 判断竞赛状态
-                            if (that.items.list[index].endingSign === true) {
-                                that.items.list[index].tagMode = {type: 'danger', content: '已结束'};
-                            } else if (new Date(that.items.list[index].startTime) > new Date()) {
-                                that.items.list[index].tagMode = {type: '', content: '未开始'};
-                            } else {
-                                that.items.list[index].tagMode = {type: 'success', content: '进行中'};
-                            }
-                            // 互动信息
-                            that.items.list[index].viewCount = 0;
-                            that.items.list[index].topCount = 0;
-                            that.items.list[index].likeCount = 0;
-                            that.items.list[index].replyCount = 0;
-                        }
-                    }
-                }).catch(err => {
-                    that.errorMessage('请求失败');
-                });
+                that.queryCompetitionList(data, function (data) {
+                    that.items = data;
+                }, that.warningMessage);
             },
             /**
              * 跳转到竞赛详情页面
@@ -134,19 +111,6 @@
              */
             toCompetitionView(id) {
                 this.$router.push({path : '/competition/cm' + id});
-            },
-            /**
-             * 获取字符串的哈希值
-             * @param str 字符串
-             * @returns {number} 哈希值
-             */
-            getHashCode(str){
-                let hash = 1315423911, i, ch;
-                for (i = str.length - 1; i >= 0; i--) {
-                    ch = str.charCodeAt(i);
-                    hash ^= ((hash << 5) + ch + (hash >> 2));
-                }
-                return  (hash & 0x7FFFFFFF);
             }
         }
     }

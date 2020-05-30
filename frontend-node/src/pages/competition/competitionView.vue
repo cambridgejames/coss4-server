@@ -71,10 +71,11 @@
     import message from "../../assets/js/message";
     import format from "../../assets/js/format";
     import config from "../../assets/js/config";
+    import baseInformation from "../../assets/js/api/competitionManager/baseInformation";
 
     export default {
         name: "competitionView",
-        mixins: [message, format, config],
+        mixins: [message, format, config, baseInformation],
         data() {
             return {
                 activeName: 'detail',
@@ -90,22 +91,16 @@
             }
         },
         mounted() {
-            this.queryCompetition();
+            this.queryCompetitionImpl();
         },
         methods: {
-            queryCompetition() {
+            queryCompetitionImpl() {
                 let that = this;
                 let data = {cid: that.$route.params.id.substr(2)};
-                this.$axios.put('/api/competition-management/base/queryCompetition', data).then(result => {
-                    if (result.data.code === 0) {
-                        that.competitionInfo = result.data.data;
-                        that.competitionInfo.notice = that.notice;
-                    } else {
-                        that.warningMessage(result.data.msg);
-                    }
-                }).catch(err => {
-                    that.errorMessage('请求失败');
-                });
+                that.queryCompetition(data, function(result) {
+                    that.competitionInfo = result;
+                    that.competitionInfo.notice = that.notice;
+                }, that.warningMessage);
             },
             certificationResult() {
                 let newPage = this.$router.resolve({path: '/certification/result/cm' + this.competitionInfo.id});
