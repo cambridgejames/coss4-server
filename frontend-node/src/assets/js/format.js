@@ -1,7 +1,5 @@
 export default {
-    data() {
-        return {}
-    },
+    name: 'format',
     methods: {
         formatDate(currentDate) {
             let date = new Date(currentDate);
@@ -20,6 +18,14 @@ export default {
             let m = currentDate.getMinutes() + ':';
             let s = currentDate.getSeconds();
             return Y+M+D+h+m+s; 
+        },
+        formatImageUrl(imageUrl) {
+            if (imageUrl.indexOf('https://') === 0) {
+                imageUrl = imageUrl.substr(6);
+            } else if (imageUrl.indexOf('http://') === 0) {
+                imageUrl = imageUrl.substr(5);
+            }
+            return imageUrl;
         }
     }
 }
