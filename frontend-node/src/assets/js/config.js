@@ -30,6 +30,7 @@ export default {
       }).then(() => {
         this.user = null;
         this.flushUserInfo();
+        this.$router.go(0);
         message.successMessage('退出成功');
       }).catch(() => {});
     }

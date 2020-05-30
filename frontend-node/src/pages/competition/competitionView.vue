@@ -14,12 +14,13 @@
                             <span style="margin-right: 20px;">CM{{competitionInfo.id}}</span>
                             <span><i class="el-icon-time"></i>&nbsp;{{formatDateTime(new Date(competitionInfo.startTime))}}</span>
                         </div>
-                        <div v-if="!!user && !!user.id">
-                            <el-button v-if="user.id === competitionInfo.userId || user.id === 1"
+                        <div :key="user">
+                            <el-button v-if="user !== null && (user.id === competitionInfo.userId || user.id === 1)"
                                        type="primary">信息维护</el-button>
-                            <el-button v-if="user.id !== competitionInfo.userId" type="primary">参赛人员入口</el-button>
+                            <el-button v-if="user !== null && (user.id !== competitionInfo.userId || user.id === 1)" type="primary">参赛人员入口</el-button>
                             <el-button type="primary" @click="certificationResult">成绩认证</el-button>
                         </div>
+                        <div>{{user}}</div>
                     </div>
                 </div>
                 <!--<div>{{competitionInfo}}</div>-->
