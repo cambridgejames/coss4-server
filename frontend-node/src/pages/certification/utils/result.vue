@@ -53,10 +53,11 @@
     import baseInformation from "../../../assets/js/api/competitionManagement/baseInformation";
     import message from "../../../assets/js/message";
     import  format from  "../../../assets/js/format";
+    import jspdf from "../../../assets/js/pdf/jspdf";
 
     export default {
         name: "result",
-        mixins: [message, format, baseInformation],
+        mixins: [message, format, baseInformation, jspdf],
         data() {
             return {
                 competitionInfo: {
@@ -110,7 +111,7 @@
                     this.pdfLoading = true;
                     that.result.src = '';
                     setTimeout(function () {
-                        that.result.src = 'data:application/pdf;';
+                        that.result.src = that.createPdf(that.competitionInfo);
                         that.pdfLoading = false;
                     }, 2000);
                 } else {
