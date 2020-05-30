@@ -13,6 +13,7 @@ export default {
         this.$message({showClose: true, type: 'warning', message: content, duration: 1500});
     },
     errorMessage(content) {
+        console.log(this.$message);
         this.$message({showClose: true, type: 'error', message: content, duration: 1500});
     }
     }

@@ -123,9 +123,10 @@
 <script>
   import config from "../../assets/js/config";
   import message from "../../assets/js/message";
+  import loginAndLogout from "../../assets/js/api/userManagement/loginAndLogout";
 
   export default {
-    mixins: [config, message],
+    mixins: [config, message, loginAndLogout],
     data() {
       let imageVerificationRule = (rule, value, callback) => {
         let that = this;
@@ -235,20 +236,11 @@
         that.form.errorCode.userLoginError = '';
         that.$refs['userLoginForm'].validate((valid) => {
           if (valid) {
-            that.$axios.post('/api/user-management/entry/loginWithUsualInfo', data).then(result => {
-              if (result.data.code === 0) {
-                that.isLogin = true;
-                that.user = result.data.data;
-                that.flushUserInfo();
-                that.successMessage('登陆成功');
-                that.$router.push({path: that.$route.query.from});
-              } else {
-                that.form.errorCode.userLoginError = result.data.msg;
-                that.getImageVerification();
-                return false;
-              }
-            }).catch(err => {
-              that.errorMessage('请求失败');
+            that.loginWithUsualInfo(data, function() {
+              that.$router.push({path: that.$route.query.from});
+            }, function() {
+              that.form.errorCode.userLoginError = result.data.msg;
+              that.getImageVerification();
               return false;
             });
           } else {
