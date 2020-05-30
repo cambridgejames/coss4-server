@@ -11,12 +11,12 @@
                     <el-submenu index="/user" v-else>
                         <template slot="title">
                             <el-avatar shape="square" size="small" :src="user.imageUrl" style="margin-right: 6px;"></el-avatar>
-                            {{user.userName}}
+                            {{user.nickname}}
                         </template>
                         <el-menu-item index="/info">用户资料</el-menu-item>
                         <el-menu-item index="/settings">设置</el-menu-item>
                         <el-menu-item index="/help">帮助</el-menu-item>
-                        <el-menu-item @click="clearUserInfo">退出</el-menu-item>
+                        <el-menu-item @click="logoutImpl">退出</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </div>
@@ -29,10 +29,24 @@
 
 <script>
     import config from "../../assets/js/config";
+    import loginAndLogout from "../../assets/js/api/userManagement/loginAndLogout";
 
     export default {
         name: "certification",
-        mixins: [config]
+        mixins: [config, loginAndLogout],
+        methods: {
+            logoutImpl() {
+                this.$confirm('确定要退出系统吗？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.logout(function () {
+                        message.successMessage('退出成功');
+                    }, this.errorMessage);
+                }).catch(() => {});
+            }
+        }
     }
 </script>
 

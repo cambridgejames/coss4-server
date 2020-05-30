@@ -20,6 +20,19 @@ export default {
             }).catch(err => {
                 that.errorMessage('请求失败');
             });
+        },
+        logout(success, failed) {
+            let that = this;
+            this.$axios.post('/api/user-management/entry/logout', {}).then(result => {
+                if (result.data.code === 0) {
+                    this.clearUserInfo();
+                    success(result.data.msg);
+                } else if ('function' === typeof failed) {
+                    failed(result.data.msg);
+                }
+            }).catch(err => {
+                that.errorMessage('请求失败');
+            });
         }
     }
 }
