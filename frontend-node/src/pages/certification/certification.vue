@@ -11,7 +11,7 @@
                     <el-submenu index="/user" v-else>
                         <template slot="title">
                             <el-avatar shape="square" size="small" :src="user.imageUrl" style="margin-right: 6px;"></el-avatar>
-                            {{user.userName}}
+                            {{user.nickname}}
                         </template>
                         <el-menu-item index="/info">用户资料</el-menu-item>
                         <el-menu-item index="/settings">设置</el-menu-item>
