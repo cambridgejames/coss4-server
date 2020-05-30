@@ -69,7 +69,7 @@ public class BaseInformationServiceImpl implements BaseInformationService {
      */
     @Override
     public Map<String, Object> queryCompetition(Integer cid) {
-        Comp comp = compMapper.selectByPrimaryKey(cid);
+        CompVO comp = compMapper.selectByPrimaryKey(cid);
         if (comp == null) {
             return CommonResultUtil.returnFalse(MessageCode.OTHER_ERROR);
         }
@@ -86,9 +86,9 @@ public class BaseInformationServiceImpl implements BaseInformationService {
     @Override
     public Map<String, Object> queryCompetitionList(CompDTO compDTO) {
         PageHelper.startPage(compDTO.getPageNumber(), compDTO.getPageSize());
-        Page<Comp> compListPage = compMapper.queryCompetitionList(compDTO);
-        PageInfo<Comp> pageInfo = new PageInfo<>(compListPage);
-        List<Comp> compList = pageInfo.getList();
+        Page<CompVO> compListPage = compMapper.queryCompetitionList(compDTO);
+        PageInfo<CompVO> pageInfo = new PageInfo<>(compListPage);
+        List<CompVO> compList = pageInfo.getList();
         List<CompVO> compVOList = CompTransformUtil.entity2VoList(compList);
         return CommonResultUtil.returnTrue(pageInfo.getTotal(), compDTO.getPageNumber(), compVOList);
     }
@@ -102,9 +102,9 @@ public class BaseInformationServiceImpl implements BaseInformationService {
     @Override
     public Map<String, Object> queryMyCompetitionList(CompDTO compDTO) {
         PageHelper.startPage(compDTO.getPageNumber(), compDTO.getPageSize());
-        Page<Comp> compListPage = compMapper.queryMyCompetitionList(compDTO);
-        PageInfo<Comp> pageInfo = new PageInfo<>(compListPage);
-        List<Comp> compList = pageInfo.getList();
+        Page<CompVO> compListPage = compMapper.queryMyCompetitionList(compDTO);
+        PageInfo<CompVO> pageInfo = new PageInfo<>(compListPage);
+        List<CompVO> compList = pageInfo.getList();
         List<CompVO> compVOList = CompTransformUtil.entity2VoList(compList);
         return CommonResultUtil.returnTrue(pageInfo.getTotal(), compDTO.getPageNumber(), compVOList);
     }

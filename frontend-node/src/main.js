@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
+import { Message } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import './assets/font/iconfont/iconfont.css';
@@ -15,6 +16,8 @@ Vue.prototype.$axios = Axios;
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
 Vue.use(VueCookies);
 Vue.use(ElementUI);
+
+Vue.prototype.$message = Message;
 
 // 引入全局CSS样式
 import './assets/scss/main.css'
@@ -39,6 +42,7 @@ router.beforeEach((to, from, next) => {
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  render: h => h(App),
   router,
   components: { App },
   template: '<App/>'

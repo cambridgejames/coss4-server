@@ -71,7 +71,7 @@
     import message from "../../assets/js/message";
     import format from "../../assets/js/format";
     import config from "../../assets/js/config";
-    import baseInformation from "../../assets/js/api/competitionManager/baseInformation";
+    import baseInformation from "../../assets/js/api/competitionManagement/baseInformation";
 
     export default {
         name: "competitionView",

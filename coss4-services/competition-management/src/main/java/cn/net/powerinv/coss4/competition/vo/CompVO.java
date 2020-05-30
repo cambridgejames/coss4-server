@@ -15,6 +15,7 @@ public class CompVO {
     private String compName;
     private Date startTime;
     private Integer userId;
+    private String nickname;
     private String imageUrl;
     private Boolean endingSign;
     private Boolean enterSign;
