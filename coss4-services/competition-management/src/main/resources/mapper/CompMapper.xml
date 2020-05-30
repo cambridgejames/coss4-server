@@ -18,11 +18,13 @@
     id, comp_name, start_time, user_id, image_url, ending_sign, enter_sign, comp_state, detailed_information,
     create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from comp
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="VOResultMap">
+    select t.id, t.comp_name, t.start_time, t.user_id, t.image_url, t.ending_sign, t.enter_sign, t.comp_state, t.detailed_information,
+           t.create_time, t.update_time, u.nickname
+    from comp t
+    left join user u on u.id = t.user_id
+    where t.id = #{id,jdbcType=INTEGER}
+    and t.comp_state &lt;&gt; 30
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comp
@@ -162,12 +164,30 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
+  <resultMap id="VOResultMap" type="cn.net.powerinv.coss4.competition.vo.CompVO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="comp_name" jdbcType="VARCHAR" property="compName" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="ending_sign" jdbcType="BIT" property="endingSign" />
+    <result column="enter_sign" jdbcType="BIT" property="enterSign" />
+    <result column="comp_state" jdbcType="INTEGER" property="compState" />
+    <result column="detailed_information" jdbcType="LONGVARCHAR" property="detailedInformation" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
   <!-- 查询竞赛列表 -->
-  <select id="queryCompetitionList" parameterType="cn.net.powerinv.coss4.competition.vo.CompDTO" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List" />
+  <select id="queryCompetitionList" parameterType="cn.net.powerinv.coss4.competition.vo.CompDTO" resultMap="VOResultMap">
+    select t.id, t.comp_name, t.start_time, t.user_id, t.image_url, t.ending_sign, t.enter_sign, t.comp_state, t.detailed_information,
+    t.create_time, t.update_time, u.nickname
     from comp t
+    left join user u on u.id = t.user_id
     <where>
-      t.comp_state &lt;&gt; 30
+      t.comp_state &lt;&gt; 30 and t.comp_state &lt;&gt; 20
       <choose>
         <when test="cid != null">
           and t.id = #{cid,jdbcType=INTEGER}
@@ -214,9 +234,11 @@
   </select>
 
   <!-- 查询指定用户名下的竞赛列表 -->
-  <select id="queryMyCompetitionList" parameterType="cn.net.powerinv.coss4.competition.vo.CompDTO" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List" />
+  <select id="queryMyCompetitionList" parameterType="cn.net.powerinv.coss4.competition.vo.CompDTO" resultMap="VOResultMap">
+    select t.id, t.comp_name, t.start_time, t.user_id, t.image_url, t.ending_sign, t.enter_sign, t.comp_state, t.detailed_information,
+    t.create_time, t.update_time, u.nickname
     from comp t
+    left join user u on u.id = t.user_id
     where t.user_id = #{uid,jdbcType=INTEGER}
     and t.comp_state &lt;&gt; 30
     <choose>

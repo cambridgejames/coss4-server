@@ -40,6 +40,12 @@
             </exclusions>
         </dependency>
 
+        <!-- 添加${spring.cloud.client.ip-address}支持 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
+        </dependency>
+
         <!-- Eureka 客户端 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

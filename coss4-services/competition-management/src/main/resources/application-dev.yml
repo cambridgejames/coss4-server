@@ -37,6 +37,9 @@ mybatis:
   type-aliases-package: cn.net.powerinv.coss4.entity
 
 eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
   client:
     service-url:
       defaultZone: http://192.168.0.59:8000/eureka/
