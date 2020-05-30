@@ -15,6 +15,14 @@ export default {
                     } else {
                         result.data.data.imageUrl = that.formatImageUrl(result.data.data.imageUrl);
                     }
+                    // 判断竞赛状态
+                    if (result.data.data.endingSign === true) {
+                        result.data.data.tagMode = {type: 'danger', content: '已结束'};
+                    } else if (new Date(result.data.data.startTime) > new Date()) {
+                        result.data.data.tagMode = {type: '', content: '未开始'};
+                    } else {
+                        result.data.data.tagMode = {type: 'success', content: '进行中'};
+                    }
                     success(result.data.data);
                 } else if ('function' === typeof failed) {
                     failed(result.data.msg);
