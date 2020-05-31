@@ -31,7 +31,8 @@ router.beforeEach((to, from, next) => {
     // 完全匹配
     next();
   } else if (to.path.indexOf('/competition/cm') === 0 && checkRate(to.path.substr(15))
-      || to.path.indexOf('/certification/result/cm') === 0 && checkRate(to.path.substr(24))) {
+      || to.path.indexOf('/certification/result/cm') === 0 && checkRate(to.path.substr(24))
+      || to.path.indexOf('/scoring/cm') === 0 && checkRate(to.path.substr(11))) {
     // 匹配以 :id 结尾的url
     next();
   } else {
@@ -50,6 +51,6 @@ new Vue({
 
 function checkRate(number) {
   //判断正整数/[1−9]+[0−9]∗]∗/
-  let re = /^[0-9]+.?[0-9]*/;
-  return re.test(number);
+  let re = /[1-9]\d*/g;
+  return /(^[1-9]\d*$)/.test(number);
 }

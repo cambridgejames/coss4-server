@@ -51,6 +51,10 @@ export default new Router({
           component: () => import('@/pages/certification/utils/result')
         }
       ]
+    },
+    {
+      path: '/scoring/:id',
+      component: () => import('@/pages/score/scoreHome')
     }
   ]
 })

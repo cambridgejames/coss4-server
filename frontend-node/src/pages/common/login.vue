@@ -101,7 +101,7 @@
             </el-col>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="">登录</el-button>
+            <el-button type="primary" @click="loginWithCompetitionAccount">登录</el-button>
             <el-button @click="goBack">返回</el-button>
             <el-link type="primary" :underline="false" style="float: right;">忘记密码？</el-link>
           </el-form-item>
@@ -247,6 +247,13 @@
             return false;
           }
         });
+      },
+      loginWithCompetitionAccount() {
+        let that = this;
+        if (that.form.playerLogin.mode) {
+          // 评委账号
+          that.$router.push({path: '/scoring/cm5'});
+        }
       },
       goBack() {
         let that = this;
