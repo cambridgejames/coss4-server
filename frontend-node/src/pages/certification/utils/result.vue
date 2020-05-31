@@ -107,11 +107,10 @@
                 }
                 let pattern = /\w{8}(-\w{4}){3}-\w{12}/g;   // 使用政策表达式校验编号是否是UUID格式
                 if (pattern.test(this.result.number)) {
-                    // TODO: 调接口查询成绩认证信息
                     this.pdfLoading = true;
                     that.result.src = '';
                     setTimeout(function () {
-                        that.result.src = that.createPdf(that.competitionInfo);
+                        that.result.src = that.createPdf(that.competitionInfo) + '#view=fit';
                         that.pdfLoading = false;
                     }, 2000);
                 } else {

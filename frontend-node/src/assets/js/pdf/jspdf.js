@@ -5,10 +5,10 @@ export default {
     methods: {
         createPdf(competitionInfo) {
             let pdf = new JSPDF("p", "mm", "a4");
-            pdf.setFont("FZYTK");
             pdf.setFontSize(20);
-            pdf.text(competitionInfo.compName, 55, 180);
-            return pdf.output("datauristring");
+            pdf.text(20, 20, competitionInfo.compName);
+            // return pdf.output("datauristring");
+            return '/static/result_template.pdf';
         }
     }
 }
