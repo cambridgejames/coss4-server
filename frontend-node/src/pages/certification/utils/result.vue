@@ -111,7 +111,7 @@
                     this.pdfLoading = true;
                     that.result.src = '';
                     setTimeout(function () {
-                        that.result.src = that.createPdf(that.competitionInfo);
+                        that.result.src = that.createPdf(that.competitionInfo) + '#view=fit';
                         that.pdfLoading = false;
                     }, 2000);
                 } else {

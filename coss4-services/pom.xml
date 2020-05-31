@@ -18,6 +18,7 @@
         <module>user-management</module>
         <module>competition-management</module>
         <module>system-dictionary</module>
+        <module>certification-authority</module>
     </modules>
 
     <packaging>pom</packaging>
