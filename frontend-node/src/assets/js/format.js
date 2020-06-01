@@ -26,6 +26,12 @@ export default {
                 imageUrl = imageUrl.substr(5);
             }
             return imageUrl;
+        },
+        formatVarToArray(stringOrArray) {
+            if ('string' === typeof stringOrArray) {
+                stringOrArray = [stringOrArray];
+            }
+            return stringOrArray;
         }
     }
 }

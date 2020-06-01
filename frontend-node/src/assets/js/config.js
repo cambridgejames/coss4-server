@@ -20,10 +20,14 @@ export default {
       this.isLogin = this.user !== null;
       return this.user;
     },
-    clearUserInfo() {
+    clearUserInfo(targetUrl) {
         this.user = null;
         this.flushUserInfo();
-        this.$router.go(0);
+        if (!!targetUrl) {
+            this.$router.push({path: targetUrl});
+        } else {
+            this.$router.go(0);
+        }
     }
   }
 }
