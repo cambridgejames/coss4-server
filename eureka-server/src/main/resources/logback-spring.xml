@@ -18,7 +18,8 @@
             <!--日志文件输出的文件名-->
             <FileNamePattern>${LOG_PATH}/coss4-eureka-server-%d{yyyy-MM-dd}.log</FileNamePattern>
             <!--日志文件保留天数-->
-            <MaxHistory>60</MaxHistory>
+            <MaxHistory>7</MaxHistory>
+            <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
         <!-- 日志文件的格式 -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
