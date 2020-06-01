@@ -36,7 +36,7 @@
 - MySQL 8.0.15 或 MariaDB 5.5.64
 - MongoDB 4.2.5
 
-### 二、构建方法
+### 二、构建后端
 
 #### 1. 将存储库克隆到本地环境
 ```
@@ -69,6 +69,10 @@ sudo ./coss4.sh --build
 
 有关构建工具的使用，请参考 `coss4 --help` 或 `sudo ./coss4.sh --help`
 
+### 三、构建前端
+
+前端项目的构建方法请参考[前端项目文档](./frontend-node/README.md)
+
 ## 文档
 
 ### 一、API接口文档
@@ -84,6 +88,10 @@ Zuul 服务网关模块：[API Gateway](./coss4-api-gateway/README.md)
 其它主要服务模块：[COSS4 Services](./coss4-services/README.md)
 
 前端项目文档：[Frontend Node](./frontend-node/README.md)
+
+### 三、更新说明
+
+详见[更新说明文档](./docs/Version_Description.md)
 
 ## 目录结构
 
