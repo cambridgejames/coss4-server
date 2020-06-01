@@ -2,7 +2,7 @@
 
 > A Vue.js frontend project for competition online scoring system version 4.0.x
 
-## 构建
+## 构建方法
 
 ``` bash
 # install dependencies
@@ -18,6 +18,10 @@ npm run build
 npm run build --report
 ```
 
-## 许可
+## 版权说明
 
-本项目签署了MIT许可协议
+本项目签署了MIT许可协议，详情请参阅 [LICENSE](./LICENSE) 文件
+
+原作者：Cambridge James
+
+如果正在使用过程中遇到问题，请提交 Issues 至 [GitHub](https://github.com/cambridgejames/coss4-server/issues)
