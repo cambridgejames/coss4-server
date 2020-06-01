@@ -21,11 +21,11 @@ export default {
                 that.errorMessage('请求失败');
             });
         },
-        logout(success, failed) {
+        logout(success, failed, targetUrl) {
             let that = this;
             this.$axios.post('/api/user-management/entry/logout', {}).then(result => {
                 if (result.data.code === 0) {
-                    this.clearUserInfo();
+                    this.clearUserInfo(targetUrl);
                     success(result.data.msg);
                 } else if ('function' === typeof failed) {
                     failed(result.data.msg);

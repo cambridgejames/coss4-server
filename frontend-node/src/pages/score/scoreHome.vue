@@ -162,10 +162,9 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    that.$router.push({path: '/login'});
                     that.logout(function () {
                         that.successMessage('退出成功');
-                    }, that.errorMessage);
+                    }, that.errorMessage, '/login');
                 }).catch(() => {});
             },
             networkTest() {
