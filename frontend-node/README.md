@@ -18,6 +18,10 @@ npm run build
 npm run build --report
 ```
 
+## 功能介绍
+
+有关 COSS4 系统前端模块的功能介绍请见[功能介绍文档](./docs/index.md)。
+
 ## 版权说明
 
 本项目签署了MIT许可协议，详情请参阅 [LICENSE](./LICENSE) 文件
