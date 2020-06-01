@@ -43,9 +43,10 @@
 <script>
   import config from "../assets/js/config";
   import loginAndLogout from "../assets/js/api/userManagement/loginAndLogout";
+  import message from "../assets/js/message";
 
   export default {
-    mixins: [config, loginAndLogout],
+    mixins: [config, loginAndLogout, message],
     data() {
       return {
         activeName: '1',
@@ -65,14 +66,15 @@
     },
     methods: {
       logoutImpl() {
-        this.$confirm('确定要退出系统吗？', '提示', {
+        let that = this;
+        that.$confirm('确定要退出系统吗？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.logout(function () {
-            message.successMessage('退出成功');
-          }, this.errorMessage);
+          that.logout(function () {
+            that.successMessage('退出成功');
+          }, that.errorMessage);
         }).catch(() => {});
       }
     }

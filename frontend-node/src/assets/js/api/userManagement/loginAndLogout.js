@@ -25,7 +25,7 @@ export default {
             let that = this;
             this.$axios.post('/api/user-management/entry/logout', {}).then(result => {
                 if (result.data.code === 0) {
-                    this.clearUserInfo(targetUrl);
+                    that.clearUserInfo(targetUrl);
                     success(result.data.msg);
                 } else if ('function' === typeof failed) {
                     failed(result.data.msg);

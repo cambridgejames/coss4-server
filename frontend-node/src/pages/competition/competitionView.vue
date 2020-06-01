@@ -14,7 +14,7 @@
                             <span style="margin-right: 20px;">CM{{competitionInfo.id}}</span>
                             <span><i class="el-icon-time"></i>&nbsp;{{formatDateTime(new Date(competitionInfo.startTime))}}</span>
                         </div>
-                        <div :key="user">
+                        <div>
                             <el-button v-if="user !== null && (user.id === competitionInfo.userId || user.id === 1)"
                                        type="primary">信息维护</el-button>
                             <el-button v-if="user !== null && (user.id !== competitionInfo.userId || user.id === 1)" type="primary">参赛人员入口</el-button>
@@ -80,7 +80,8 @@
             return {
                 activeName: 'detail',
                 competitionInfo: {
-                    imageUrl: '/static/imgs/cover/competition-default-cover-1.png'
+                    imageUrl: '/static/imgs/cover/competition-default-cover-1.png',
+                    notice: []
                 },
                 notice: [
                     {type: 'success', description: '这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……'},

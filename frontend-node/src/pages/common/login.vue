@@ -237,7 +237,7 @@
         that.$refs['userLoginForm'].validate((valid) => {
           if (valid) {
             that.loginWithUsualInfo(data, function() {
-              that.$router.push({path: that.$route.query.from});
+              that.goBack();
             }, function(msg) {
               that.form.errorCode.userLoginError = msg;
               that.getImageVerification();
@@ -257,7 +257,14 @@
       },
       goBack() {
         let that = this;
-        that.$router.push({path: that.$route.query.from});
+        let from = that.$route.query.from;
+        if (!!from) {
+            that.$router.push({path: from});
+            console.log(from);
+        } else {
+            that.$router.push({path: '/'});
+            console.log('/');
+        }
       }
     }
   }
