@@ -1,0 +1,227 @@
+$condition-span-width: 40px;
+$list-theme-color: #409eff;
+
+.list-container {
+    .list-input-box {
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        .input-input {
+            width: 100%;
+            margin-right: 10px;
+        }
+    }
+
+    .list-condition {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        line-height: 24px;
+        font-size: 16px;
+        cursor: default;
+
+        .condition-span {
+            width: $condition-span-width;
+            min-width: $condition-span-width;
+            height: 24px;
+            border-left: solid 5px $list-theme-color;
+            text-align: left;
+            padding-left: 20px;
+            color: #999;
+        }
+        .condition-item {
+            width: 100%;
+            padding-left: 10px;
+
+            span {
+                height: 24px;
+                display: inline-block;
+                padding: 0 10px;
+                margin-bottom: 10px;
+                color: #666;
+                cursor: pointer;
+                &:hover {
+                    background-color: #eee;
+                }
+                &[class*=selected] {
+                    color: $list-theme-color !important;
+                }
+            }
+        }
+    }
+    .list-result-box {
+        margin-top: 40px;
+
+        .list-condition {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+
+            .condition-span {
+                width: $condition-span-width;
+                min-width: $condition-span-width;
+                height: 24px;
+                border-left: solid 5px $list-theme-color;
+                text-align: left;
+                padding-left: 20px;
+                color: #999;
+            }
+            .condition-item {
+                padding-left: 10px;
+
+                span {
+                    height: 24px;
+                    display: inline-block;
+                    padding: 0 30px;
+                    color: #666;
+                    cursor: pointer;
+                    border-left: 1px solid #ddd;
+
+                    &:last-child {
+                        border-right: 1px solid #ddd;
+                    }
+
+                    &:hover {
+                        background-color: #eee;
+                    }
+
+                    &[class*=selected] {
+                        color: $list-theme-color !important;
+                    }
+                }
+            }
+        }
+
+        .result-none {
+            height: 100px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 100px;
+            color: #999;
+        }
+
+        .result-item-box {
+            height: 154px;
+            padding: 40px 0;
+            border-bottom: 1px dashed #ddd;
+
+            .result-item-inner-box {
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+
+                .item-image-box {
+                    width: 280px;
+                    min-width: 280px;
+                    overflow: hidden;
+
+                    .item-image {
+                        width: 100%;
+                        height: 100%;
+                        cursor: pointer;
+                        transition: all 0.6s;
+                    }
+                }
+
+                .item-info-box {
+                    width: 100%;
+                    margin-left: 20px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .info-title-box {
+                        height: 24px;
+                        min-height: 24px;
+                        margin-bottom: 10px;
+                        display: flex;
+                        flex-direction: row;
+
+                        .info-title {
+                            display: inline-block;
+                            width: 100%;
+                            height: 24px;
+                            margin-left: 10px;
+                            font-size: 16px;
+                            font-weight: bold;
+                            line-height: 26px;
+                            cursor: pointer;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 1;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+
+                            &:hover {
+                                color: $list-theme-color;
+                                text-decoration:    underline;
+                            }
+                        }
+
+                        .info-time {
+                            width: 80px;
+                            min-width: 80px;
+                            height: 24px;
+                            margin-left: 10px;
+                            font-size: 14px;
+                            line-height: 24px;
+                            text-align: right;
+                        }
+                    }
+
+                    .holder-time-box {
+                        height: 20px;
+                        min-height: 20px;
+                        margin-bottom: 10px;
+                        span {
+                            display: inline-block;
+                            margin-right: 20px;
+                            font-size: 14px;
+                            color: #aaa;
+                        }
+                    }
+
+                    .item-detail-box {
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 3;
+                        height: 100%;
+                        font-size: 15px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        text-align: justify;
+                    }
+
+                    .item-function-box {
+                        height: 20px;
+                        min-height: 20px;
+                        margin-top: 10px;
+                        color: #999;
+                        ul {
+                            float: right;
+                            height: 28px;
+                            li{
+                                margin-left: 35px;
+                                line-height: 28px;
+                                float: left;
+                                i { font-size: 1.2em; margin-right: 10px; }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                background-color: #fafafa;
+                .item-image {
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .result-pagination-box {
+            margin: 70px 0;
+            text-align: center;
+        }
+    }
+}

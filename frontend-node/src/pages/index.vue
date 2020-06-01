@@ -8,21 +8,23 @@
           <el-menu-item index="/competition">竞赛</el-menu-item>
           <el-menu-item index="/community">社区</el-menu-item>
           <el-menu-item index="/wiki">教程</el-menu-item>
-          <el-menu-item index="/login" v-if="!isLogin" target="_blank">登录/注册</el-menu-item>
+          <el-menu-item :index="'/login?from=' + this.$route.path" v-if="!isLogin" target="_blank">登录/注册</el-menu-item>
           <el-submenu index="/user" v-else>
             <template slot="title">
-              <el-avatar size="medium" :src="user.avatar"></el-avatar>&nbsp;{{user.username}}
+              <el-avatar shape="square" size="small" :src="user.imageUrl" style="margin-right: 6px;"></el-avatar>
+              {{user.nickname}}
             </template>
             <el-menu-item index="/info">用户资料</el-menu-item>
             <el-menu-item index="/settings">设置</el-menu-item>
             <el-menu-item index="/help">帮助</el-menu-item>
-            <el-menu-item index="/exit">退出</el-menu-item>
+            <el-menu-item @click="logoutImpl">退出</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
     </div>
     <div id="main-container" class="main-container">
-      <router-view/>
+      <el-backtop></el-backtop>
+      <router-view style="min-height: 100vh;" />
     </div>
     <div id="main-footer" class="main-footer">
       <div style="max-width: 1200px; margin: 0 auto;">
@@ -40,9 +42,11 @@
 
 <script>
   import config from "../assets/js/config";
+  import loginAndLogout from "../assets/js/api/userManagement/loginAndLogout";
+  import message from "../assets/js/message";
 
   export default {
-    mixins: [config],
+    mixins: [config, loginAndLogout, message],
     data() {
       return {
         activeName: '1',
@@ -61,8 +65,17 @@
       };
     },
     methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+      logoutImpl() {
+        let that = this;
+        that.$confirm('确定要退出系统吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          that.logout(function () {
+            that.successMessage('退出成功');
+          }, that.errorMessage);
+        }).catch(() => {});
       }
     }
   }
@@ -77,11 +90,13 @@
       top: 0;
       left: 0;
       right: 0;
+      min-width: 600px;
       height: 60px;
       line-height: 60px;
       padding: 0 50px;
       background-color: #fff;
       border-bottom: 1px solid #dcdfe6;
+      z-index: 100;
       .main-icon {
         float: left;
         height: 60px;

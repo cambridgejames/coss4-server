@@ -20,6 +20,10 @@ export default new Router({
           component: () => import('@/pages/competition/competition')
         },
         {
+          path: '/competition/:id',
+          component: () => import('@/pages/competition/competitionView')
+        },
+        {
           path: '/community',
           component: () => import('@/pages/community/community')
         },
@@ -32,6 +36,25 @@ export default new Router({
     {
       path: '/login',
       component: () => import('@/pages/common/login')
+    },
+    {
+      path: '/certification',
+      redirect: '/certification',
+      component: () => import('@/pages/certification/certification'),
+      children: [
+        {
+          path: '/certification',
+          component: () => import('@/pages/certification/certificationHome')
+        },
+        {
+          path: '/certification/result/:id',
+          component: () => import('@/pages/certification/utils/result')
+        }
+      ]
+    },
+    {
+      path: '/scoring/:id',
+      component: () => import('@/pages/score/scoreHome')
     }
   ]
 })

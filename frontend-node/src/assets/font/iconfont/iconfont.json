@@ -1,0 +1,30 @@
+{
+  "id": "1852054",
+  "name": "COSS4",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2674077",
+      "name": "分享",
+      "font_class": "fenxiang1",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "8326958",
+      "name": "收 藏",
+      "font_class": "shoucang",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "11782956",
+      "name": "点赞",
+      "font_class": "zan",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

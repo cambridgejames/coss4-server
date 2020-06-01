@@ -1,6 +1,7 @@
 package cn.net.powerinv.coss4.competition.mapper;
 
 import cn.net.powerinv.coss4.competition.vo.CompDTO;
+import cn.net.powerinv.coss4.competition.vo.CompVO;
 import cn.net.powerinv.coss4.entity.Comp;
 import com.github.pagehelper.Page;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ public interface CompMapper {
 
     int insertSelective(Comp record);
 
-    Comp selectByPrimaryKey(Integer id);
+    CompVO selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Comp record);
 
@@ -24,7 +25,7 @@ public interface CompMapper {
      * @param compDTO 查询条件
      * @return 查询结果
      */
-    Page<Comp> queryCompetitionList(CompDTO compDTO);
+    Page<CompVO> queryCompetitionList(CompDTO compDTO);
 
     /**
      * 查询指定用户名下的竞赛列表
@@ -32,7 +33,7 @@ public interface CompMapper {
      * @param compDTO 用户ID
      * @return 查询结果
      */
-    Page<Comp> queryMyCompetitionList(CompDTO compDTO);
+    Page<CompVO> queryMyCompetitionList(CompDTO compDTO);
 
     /**
      * 更新竞赛信息

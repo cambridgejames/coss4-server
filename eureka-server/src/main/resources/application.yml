@@ -8,6 +8,7 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
   client:
     fetch-registry: false
     register-with-eureka: false

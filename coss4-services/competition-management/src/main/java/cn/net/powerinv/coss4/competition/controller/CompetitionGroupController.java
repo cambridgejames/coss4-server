@@ -89,7 +89,7 @@ public class CompetitionGroupController {
      * @return 查询结果
      */
     @ResponseBody
-    @GetMapping("/queryGroupById")
+    @PutMapping("/queryGroupById")
     public Map<String, Object> queryGroupById(@RequestBody CompGroupDTO compGroupDTO) {
         if (ObjectUtils.isEmpty(compGroupDTO.getId())) {
             return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
@@ -113,7 +113,7 @@ public class CompetitionGroupController {
      * @return 查询结果列表
      */
     @ResponseBody
-    @GetMapping("/queryGroupList")
+    @PutMapping("/queryGroupList")
     public Map<String, Object> queryGroupList(@RequestBody CompDTO compDTO) {
         if (ObjectUtils.isEmpty(compDTO.getCid())) {
             return CommonResultUtil.returnFalse(MessageCode.PARAMETERS_NOT_ENOUGH);
