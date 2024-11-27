@@ -72,7 +72,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-            <version>5.1.46</version>
+            <version>8.0.16</version>
         </dependency>
 
         <!-- MongoDB 和分布式 Session 共享 -->
@@ -120,7 +120,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.46</version>
+                        <version>8.0.16</version>
                     </dependency>
                 </dependencies>
             </plugin>
